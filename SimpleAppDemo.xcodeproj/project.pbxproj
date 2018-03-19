@@ -28,6 +28,12 @@
 		716BFA8B2060004600B074F9 /* DetailPostViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 716BFA8A2060004600B074F9 /* DetailPostViewController.swift */; };
 		716BFA8E2060008800B074F9 /* DependencyRegistry.swift in Sources */ = {isa = PBXBuildFile; fileRef = 716BFA8D2060008800B074F9 /* DependencyRegistry.swift */; };
 		716BFA90206000C400B074F9 /* MainAssembly.swift in Sources */ = {isa = PBXBuildFile; fileRef = 716BFA8F206000C400B074F9 /* MainAssembly.swift */; };
+		716BFA9320600E1700B074F9 /* ExtUImage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 716BFA9220600E1700B074F9 /* ExtUImage.swift */; };
+		716BFA9520600E4D00B074F9 /* ExtUITableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 716BFA9420600E4D00B074F9 /* ExtUITableView.swift */; };
+		716BFA9820600FA900B074F9 /* IdentifierReusable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 716BFA9720600FA900B074F9 /* IdentifierReusable.swift */; };
+		716BFA9A20600FCC00B074F9 /* NibLoadable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 716BFA9920600FCC00B074F9 /* NibLoadable.swift */; };
+		716BFA9E206012D700B074F9 /* ListPostTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 716BFA9C206012D700B074F9 /* ListPostTableViewCell.swift */; };
+		716BFA9F206012D700B074F9 /* ListPostTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 716BFA9D206012D700B074F9 /* ListPostTableViewCell.xib */; };
 		86BB71C461DF93720E9BC829 /* Pods_SimpleAppDemoTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A40829163AA4C2AF6DC0833B /* Pods_SimpleAppDemoTests.framework */; };
 		A63ED42FB7532EE4F041A965 /* Pods_SimpleAppDemo.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2A18AB8301D1C4EBA84BC415 /* Pods_SimpleAppDemo.framework */; };
 /* End PBXBuildFile section */
@@ -81,6 +87,12 @@
 		716BFA8A2060004600B074F9 /* DetailPostViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailPostViewController.swift; sourceTree = "<group>"; };
 		716BFA8D2060008800B074F9 /* DependencyRegistry.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DependencyRegistry.swift; sourceTree = "<group>"; };
 		716BFA8F206000C400B074F9 /* MainAssembly.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainAssembly.swift; sourceTree = "<group>"; };
+		716BFA9220600E1700B074F9 /* ExtUImage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExtUImage.swift; sourceTree = "<group>"; };
+		716BFA9420600E4D00B074F9 /* ExtUITableView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExtUITableView.swift; sourceTree = "<group>"; };
+		716BFA9720600FA900B074F9 /* IdentifierReusable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IdentifierReusable.swift; sourceTree = "<group>"; };
+		716BFA9920600FCC00B074F9 /* NibLoadable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NibLoadable.swift; sourceTree = "<group>"; };
+		716BFA9C206012D700B074F9 /* ListPostTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListPostTableViewCell.swift; sourceTree = "<group>"; };
+		716BFA9D206012D700B074F9 /* ListPostTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ListPostTableViewCell.xib; sourceTree = "<group>"; };
 		77744D23934C8B8EBFB9DBE2 /* Pods-SimpleAppDemo.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SimpleAppDemo.release.xcconfig"; path = "Pods/Target Support Files/Pods-SimpleAppDemo/Pods-SimpleAppDemo.release.xcconfig"; sourceTree = "<group>"; };
 		8466415AA17A866C069DBEC4 /* Pods_SimpleAppDemoUITests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_SimpleAppDemoUITests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		A40829163AA4C2AF6DC0833B /* Pods_SimpleAppDemoTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_SimpleAppDemoTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -150,10 +162,12 @@
 		716BFA3F205FE8E900B074F9 /* SimpleAppDemo */ = {
 			isa = PBXGroup;
 			children = (
+				716BFA9620600F8900B074F9 /* Protocols */,
 				716BFA8C2060005B00B074F9 /* Dependencies */,
 				716BFA85205FFEB500B074F9 /* TranslationLayer */,
 				716BFA7E205FFE0C00B074F9 /* NetworkLayer */,
 				716BFA77205FFC4600B074F9 /* RxExtensions */,
+				716BFA9120600DE400B074F9 /* Extenstions */,
 				716BFA6E205FFB2A00B074F9 /* SceneCoordinator */,
 				716BFA7C205FFD7D00B074F9 /* UI */,
 				716BFA7D205FFDA100B074F9 /* Application */,
@@ -202,6 +216,7 @@
 		716BFA7C205FFD7D00B074F9 /* UI */ = {
 			isa = PBXGroup;
 			children = (
+				716BFA9B2060113C00B074F9 /* NibFiles */,
 				716BFA42205FE8E900B074F9 /* ListPostViewController.swift */,
 				716BFA8A2060004600B074F9 /* DetailPostViewController.swift */,
 			);
@@ -245,6 +260,33 @@
 				716BFA8F206000C400B074F9 /* MainAssembly.swift */,
 			);
 			path = Dependencies;
+			sourceTree = "<group>";
+		};
+		716BFA9120600DE400B074F9 /* Extenstions */ = {
+			isa = PBXGroup;
+			children = (
+				716BFA9220600E1700B074F9 /* ExtUImage.swift */,
+				716BFA9420600E4D00B074F9 /* ExtUITableView.swift */,
+			);
+			path = Extenstions;
+			sourceTree = "<group>";
+		};
+		716BFA9620600F8900B074F9 /* Protocols */ = {
+			isa = PBXGroup;
+			children = (
+				716BFA9720600FA900B074F9 /* IdentifierReusable.swift */,
+				716BFA9920600FCC00B074F9 /* NibLoadable.swift */,
+			);
+			path = Protocols;
+			sourceTree = "<group>";
+		};
+		716BFA9B2060113C00B074F9 /* NibFiles */ = {
+			isa = PBXGroup;
+			children = (
+				716BFA9C206012D700B074F9 /* ListPostTableViewCell.swift */,
+				716BFA9D206012D700B074F9 /* ListPostTableViewCell.xib */,
+			);
+			path = NibFiles;
 			sourceTree = "<group>";
 		};
 		AAC59E5EB3947E7E3503FCEA /* Pods */ = {
@@ -377,6 +419,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				716BFA4B205FE8E900B074F9 /* LaunchScreen.storyboard in Resources */,
+				716BFA9F206012D700B074F9 /* ListPostTableViewCell.xib in Resources */,
 				716BFA48205FE8E900B074F9 /* Assets.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -570,14 +613,19 @@
 				716BFA8E2060008800B074F9 /* DependencyRegistry.swift in Sources */,
 				716BFA84205FFE6B00B074F9 /* HTTPConfiguration.swift in Sources */,
 				716BFA74205FFBB400B074F9 /* SceneCoordinator.swift in Sources */,
+				716BFA9320600E1700B074F9 /* ExtUImage.swift in Sources */,
 				716BFA89205FFF1A00B074F9 /* APIClientError.swift in Sources */,
 				716BFA87205FFEC600B074F9 /* TranslationLayerType.swift in Sources */,
 				716BFA41205FE8E900B074F9 /* AppDelegate.swift in Sources */,
+				716BFA9A20600FCC00B074F9 /* NibLoadable.swift in Sources */,
 				716BFA70205FFB4C00B074F9 /* Scene.swift in Sources */,
 				716BFA80205FFE1D00B074F9 /* URLRequestConfiguration.swift in Sources */,
 				716BFA72205FFB7200B074F9 /* SceneTransitionType.swift in Sources */,
 				716BFA82205FFE4700B074F9 /* GetURLComponents.swift in Sources */,
+				716BFA9E206012D700B074F9 /* ListPostTableViewCell.swift in Sources */,
 				716BFA7B205FFCFA00B074F9 /* Scene+ViewController.swift in Sources */,
+				716BFA9820600FA900B074F9 /* IdentifierReusable.swift in Sources */,
+				716BFA9520600E4D00B074F9 /* ExtUITableView.swift in Sources */,
 				716BFA79205FFC7D00B074F9 /* RxNavigationControllerDelegateProxy.swift in Sources */,
 				716BFA76205FFBF700B074F9 /* SceneCoordinatorType.swift in Sources */,
 			);
