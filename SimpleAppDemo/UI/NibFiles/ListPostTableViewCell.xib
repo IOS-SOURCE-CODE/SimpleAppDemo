@@ -49,31 +49,12 @@
                             </imageView>
                         </subviews>
                     </stackView>
-                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" translatesAutoresizingMaskIntoConstraints="NO" id="ZAf-G0-q7R">
-                        <rect key="frame" x="10" y="66" width="412" height="300"/>
+                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="ZAf-G0-q7R">
+                        <rect key="frame" x="10" y="10" width="412" height="300"/>
+                        <constraints>
+                            <constraint firstAttribute="height" constant="300" id="sYE-3G-Yxi"/>
+                        </constraints>
                     </imageView>
-                    <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="8db-xH-7aa">
-                        <rect key="frame" x="17" y="378" width="70" height="22"/>
-                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                        <state key="normal" image="like">
-                            <color key="titleColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
-                        </state>
-                    </button>
-                    <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="5qc-BL-hSV">
-                        <rect key="frame" x="108" y="378" width="16" height="22"/>
-                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                        <state key="normal" image="comment"/>
-                    </button>
-                    <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Yc1-C2-Ryd">
-                        <rect key="frame" x="138" y="373" width="86" height="32"/>
-                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                        <state key="normal" image="share"/>
-                    </button>
-                    <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="5XP-qE-f6W">
-                        <rect key="frame" x="331" y="373" width="86" height="32"/>
-                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                        <state key="normal" image="save"/>
-                    </button>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="12 likes" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="LHm-2L-rDV">
                         <rect key="frame" x="45" y="419" width="56" height="21"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
@@ -88,6 +69,54 @@
                         <nil key="textColor"/>
                         <nil key="highlightedColor"/>
                     </label>
+                    <stackView opaque="NO" contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="aCq-vS-UYU">
+                        <rect key="frame" x="28" y="379" width="130" height="25"/>
+                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                        <subviews>
+                            <stackView opaque="NO" contentMode="scaleToFill" ambiguous="YES" spacing="15" translatesAutoresizingMaskIntoConstraints="NO" id="HSt-Oe-abh">
+                                <rect key="frame" x="0.0" y="0.0" width="105" height="25"/>
+                                <subviews>
+                                    <button opaque="NO" contentMode="scaleAspectFit" ambiguous="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="8db-xH-7aa">
+                                        <rect key="frame" x="0.0" y="0.0" width="25" height="25"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="25" id="QOd-b3-bGJ"/>
+                                            <constraint firstAttribute="width" constant="25" id="erX-Ng-ZzN"/>
+                                        </constraints>
+                                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                        <state key="normal" image="comment">
+                                            <color key="titleColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
+                                        </state>
+                                    </button>
+                                    <button opaque="NO" contentMode="scaleAspectFit" ambiguous="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="5qc-BL-hSV">
+                                        <rect key="frame" x="40" y="0.0" width="25" height="25"/>
+                                        <constraints>
+                                            <constraint firstAttribute="width" constant="25" id="lXH-aj-upv"/>
+                                            <constraint firstAttribute="height" constant="25" id="pfL-9w-8tQ"/>
+                                        </constraints>
+                                        <state key="normal" image="like">
+                                            <color key="titleColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
+                                        </state>
+                                    </button>
+                                    <button opaque="NO" contentMode="scaleToFill" ambiguous="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Yc1-C2-Ryd">
+                                        <rect key="frame" x="80" y="0.0" width="25" height="25"/>
+                                        <constraints>
+                                            <constraint firstAttribute="width" constant="25" id="DLE-PN-gTL"/>
+                                            <constraint firstAttribute="height" constant="25" id="nJj-0N-rby"/>
+                                        </constraints>
+                                        <state key="normal" image="share"/>
+                                    </button>
+                                </subviews>
+                            </stackView>
+                            <button opaque="NO" contentMode="scaleToFill" ambiguous="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="5XP-qE-f6W">
+                                <rect key="frame" x="105" y="0.0" width="25" height="25"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="25" id="ACn-DO-tbu"/>
+                                    <constraint firstAttribute="width" constant="25" id="QmZ-e3-9la"/>
+                                </constraints>
+                                <state key="normal" image="save"/>
+                            </button>
+                        </subviews>
+                    </stackView>
                 </subviews>
                 <constraints>
                     <constraint firstAttribute="trailing" secondItem="dKL-nD-zyQ" secondAttribute="trailing" constant="10" id="fh1-Tx-atH"/>
@@ -103,8 +132,8 @@
         </tableViewCell>
     </objects>
     <resources>
-        <image name="comment" width="16" height="16"/>
-        <image name="like" width="16" height="16"/>
+        <image name="comment" width="100" height="100"/>
+        <image name="like" width="100" height="100"/>
         <image name="more" width="24" height="24"/>
         <image name="save" width="32" height="32"/>
         <image name="share" width="32" height="32"/>
