@@ -20,7 +20,7 @@ protocol TranslationLayerType {
 }
 
 
-extension TranslationLayerType {
+class TranslationLayer: TranslationLayerType {
   
   func decodes<E: JSONDecodable>(data: Data) -> [E] {
     

@@ -13,7 +13,7 @@ protocol SceneCoordinatorType: class {
   
   var currentViewController: UIViewController? { get set }
   
-  init(window: UIWindow, mainViewController: UIViewController)
+  init(window: UIWindow, navigation: UINavigationController & MainNavigationControllerType)
   
   @discardableResult
   func transition(to scene: Scene, type: SceneTransitionType) -> Completable

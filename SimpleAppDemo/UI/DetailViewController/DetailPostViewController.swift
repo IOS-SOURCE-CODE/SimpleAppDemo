@@ -8,7 +8,9 @@
 
 import UIKit
 
-class DetailPostViewController: UIViewController {
+class DetailPostViewController: UIViewController, BindableType {
+   
+   var viewModel: DetailViewModel!
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -17,4 +19,10 @@ class DetailPostViewController: UIViewController {
     }
 
 
+}
+
+extension DetailPostViewController {
+   func bindViewModel() {
+      
+   }
 }

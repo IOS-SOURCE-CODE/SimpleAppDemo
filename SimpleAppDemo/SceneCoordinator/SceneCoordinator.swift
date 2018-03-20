@@ -14,9 +14,11 @@ class SceneCoordinator {
   fileprivate var window: UIWindow!
   var currentViewController: UIViewController?
   
-  required init(window: UIWindow, mainViewController: UIViewController) {
+  required init(window: UIWindow, navigation: UINavigationController & MainNavigationControllerType) {
     self.window = window
-    window.rootViewController = mainViewController
+    window.rootViewController = navigation
+   
+   currentViewController = navigation.viewControllers.first
     window.makeKeyAndVisible()
   }
   

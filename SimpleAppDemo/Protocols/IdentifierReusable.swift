@@ -12,7 +12,7 @@ protocol IdentifierReusable {
   static var identifier: String { get }
 }
 
-extension IdentifierReusableProtocol {
+extension IdentifierReusable {
   static var identifier: String {
     return String(describing: self)
   }

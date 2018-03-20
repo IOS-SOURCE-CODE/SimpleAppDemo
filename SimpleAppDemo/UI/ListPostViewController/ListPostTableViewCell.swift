@@ -26,3 +26,4 @@ class ListPostTableViewCell: UITableViewCell {
 
 
 extension ListPostTableViewCell: NibLoadable {}
+extension ListPostTableViewCell: IdentifierReusable {}

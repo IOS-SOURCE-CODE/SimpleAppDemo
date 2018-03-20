@@ -15,13 +15,15 @@ extension Scene {
     
     switch self {
       
-    case .home:
-      return UIViewController()
+    case .home(let viewModel):
+      var listPost = ListPostTableViewController()
+      listPost.bindViewModel(to: viewModel)
+      return listPost
       
-    default:
-      return UIViewController()
-      
-      
+    case .detail(let viewModel):
+         var detail = DetailPostViewController()
+         detail.bindViewModel(to: viewModel)
+         return detail
     }
   }
   

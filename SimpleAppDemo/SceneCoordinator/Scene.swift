@@ -9,6 +9,6 @@
 import Foundation
 
 enum Scene {
-  case home
-  case detail
+   case home(viewModel: ListPostViewModel)
+   case detail(viewModel: DetailViewModel)
 }
