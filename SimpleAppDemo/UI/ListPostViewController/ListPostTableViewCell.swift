@@ -33,7 +33,7 @@ class ListPostTableViewCell: UITableViewCell {
     postImage.kf.setImage(with: postImageUrl)
     
     
-    likeCountLabel.text = "\(items.likes.count) likes"
+    likeCountLabel.text = myLike(like: items.likes.count)
     
   }
   
@@ -51,7 +51,14 @@ class ListPostTableViewCell: UITableViewCell {
     
 }
 
-
+// MARK - helper
+extension ListPostTableViewCell {
+  fileprivate func myLike(like: Int) -> String {
+     let mylike = like > 1 ? "\(like) likes" : "\(like) like"
+    return mylike
+  }
+  
+}
 extension ListPostTableViewCell: NibLoadable {}
 extension ListPostTableViewCell: IdentifierReusable {}
 

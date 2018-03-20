@@ -18,7 +18,7 @@ class ListPostViewModel {
    
    // MAKR: - Output
    var posts = Variable<[Post]>([])
-   
+   var pagination = Variable<Pagination?>(nil)
    
    // MARK: - Input
    let network: NetworkLayerType
@@ -32,10 +32,19 @@ class ListPostViewModel {
       
       loadData()
    }
-   
-   fileprivate func loadData() {
+  
+  func loadMore() {
+    
+    
+  }
+  
+  func loadData() {
       
       network.request()
+          .asObservable()
+        .do( onCompleted: {
+          debugPrint("vm completed")
+        })
          .distinctUntilChanged()
          .map { [weak self] data  in
             guard let strongSelf = self else { return [] }
@@ -43,6 +52,7 @@ class ListPostViewModel {
             return result.data
          }.bind(to: self.posts)
          .disposed(by: bag)
+    
       
    }
 }
