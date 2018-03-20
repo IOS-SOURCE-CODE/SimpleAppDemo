@@ -11,10 +11,11 @@ import RxSwift
 import NSObject_Rx
 import RxCocoa
 
-class ListPostTableViewController: UITableViewController, BindableType {
+class ListPostTableViewController: UIViewController, BindableType {
    
    var viewModel: ListPostViewModel!
    private let bag = DisposeBag()
+   var tableView: UITableView!
    
    override func viewDidLoad() {
       super.viewDidLoad()
@@ -42,31 +43,22 @@ class ListPostTableViewController: UITableViewController, BindableType {
    
     //MARK: - Setup Tableview appearance
    fileprivate func setupTableView() {
+      tableView = UITableView(frame: self.view.bounds)
+      self.view.addSubview(tableView)
       tableView.register(ListPostTableViewCell.self)
-      tableView.estimatedRowHeight = 320
-      tableView.rowHeight = UITableViewAutomaticDimension
+//      tableView.estimatedRowHeight = 320
+      tableView.rowHeight = 455
    }
 }
 
 
 extension ListPostTableViewController {
    func bindViewModel() {
-      
-//      viewModel.posts.asObservable()
-//         .bind(to: tableView.rx.items(cellIdentifier: ListPostTableViewCell.identifier, cellType: ListPostTableViewCell.self))
-//         { index, model, cell in
-//
-//            debugPrint(model)
-//
-//         }.disposed(by: self.rx.disposeBag)
-      
-      viewModel.posts.asDriver()
-         .drive(onNext: { posts in
-            debugPrint(posts)
-         }).disposed(by: bag)
-//      viewModel.posts.asObservable().subscribe(onNext: { posts in
-//         debugPrint(posts)
-//      }).disposed(by: bag)
+    
+    viewModel.posts.asDriver()
+      .drive(tableView.rx.items(cellIdentifier: ListPostTableViewCell.identifier, cellType:  ListPostTableViewCell.self)) { index, model, cell in
+        cell.configure(with: model)
+      }.disposed(by: self.rx.disposeBag)
    }
 }
 

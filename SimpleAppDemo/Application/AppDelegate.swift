@@ -18,7 +18,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
    func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
       
       window = UIWindow(frame: UIScreen.main.bounds)
-    
+      window?.makeKeyAndVisible()
       
       // MARK: Change endpoint production or development
       EndPoint.active = EndPointConfiguration.production.active
@@ -27,6 +27,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
       SceneCoordinator.window = window
       let viewModel = dependencyRegistry.resolver.resolve(ListPostViewModel.self)!
       SceneCoordinator.transition(to: .home(viewModel: viewModel), type: .root)
+    
+    
       
       return true
    }

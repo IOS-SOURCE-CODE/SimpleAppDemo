@@ -17,6 +17,7 @@ extension Scene {
       
     case .home(let viewModel):
       var listPost = ListPostTableViewController()
+  
       listPost.bindViewModel(to: viewModel)
       return listPost
       

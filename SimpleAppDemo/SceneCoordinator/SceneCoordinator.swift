@@ -13,11 +13,7 @@ class SceneCoordinator {
   
    static var currentViewController: UIViewController?
    static var window: UIWindow!
-   init(window: UIWindow, navigation: UINavigationController) {
 
-    window.rootViewController = navigation
-    window.makeKeyAndVisible()
-  }
    
    private init() {}
    
@@ -47,8 +43,12 @@ extension SceneCoordinator : SceneCoordinatorType {
     
     switch type {
       
-    case .home:
+    case .root:
+      
+      window.rootViewController = MainNavigationController(rootViewController: viewController)
       currentViewController = SceneCoordinator.actualViewController(for: viewController)
+      
+      
       subject.onCompleted()
       
     case .push:
