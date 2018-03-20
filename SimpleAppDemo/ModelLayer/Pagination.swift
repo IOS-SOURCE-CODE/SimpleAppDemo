@@ -12,6 +12,12 @@ import Foundation
 struct Pagination : Decodable {
    let nextMaxId: String
    let nextUrl: String
+   
+   enum CodingKeys: String, CodingKey {
+      case nextMaxId = "next_max_id"
+      case nextUrl = "next_url"
+   }
+   
 }
 
 extension Pagination: JSONDecodable {

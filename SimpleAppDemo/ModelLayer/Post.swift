@@ -13,7 +13,14 @@ struct Post : Decodable {
    let id: String
    let user: User
    let images: Images
-   let like: Like
+   let likes: Like
+   
+   enum CodingKeys: String, CodingKey {
+      case id
+      case user
+      case images
+      case likes
+   }
 }
 
 extension Post: JSONDecodable {
@@ -27,6 +34,6 @@ extension Post: JSONDecodable {
       self.id = id
       self.user = User(dictionary: user)!
       self.images = Images(dictionary: images)!
-      self.like = Like(dictionary: like)!
+      self.likes = Like(dictionary: like)!
    }
 }

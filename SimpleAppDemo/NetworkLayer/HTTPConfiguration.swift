@@ -12,19 +12,22 @@ enum Method: String {
    case GET , POST
 }
 
-enum HTTPHeaderField: String {
-   case authentication = "Authorization"
-   case contentType = "Content-Type"
-   case acceptType = "Accept"
-   case acceptEncoding = "Accept-Encoding"
-   case accessToken = "access_token"
+struct HTTPHeaderField {
+   static let authentication = "Authorization"
+   static let  contentType = "Content-Type"
+   static let  acceptType = "Accept"
+   static let  acceptEncoding = "Accept-Encoding"
+  
+   static let  json = "application/json"
 }
 
-enum ContentType: String {
-   case json = "application/json"
+struct HTTPParameter {
+    static let  accessToken = "access_token"
+    static let  count = "count"
 }
 
-//TODO: Should store in keychain
+
+// TODO: - Should store in keychain
 struct Authentication {
    static let apiKey = "7322641520.f494368.f1ba46d284894a73bc75e04be1344c81"
 }

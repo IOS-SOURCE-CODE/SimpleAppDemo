@@ -9,24 +9,24 @@
 import Foundation
 import RxSwift
 
-class ListPostViewModel: ViewModelType {
+class ListPostViewModel {
    
    
    // MARK - Constrant
-    let bag = DisposeBag()
+    private let bag = DisposeBag()
    
    
    // MAKR: - Output
+   var posts = Variable<[Post]>([])
    
    
-   
-   // MARK: - Init
-   let sceneCoordinator: SceneCoordinatorType
+   // MARK: - Input
    let network: NetworkLayerType
    let translation: TranslationLayerType
    
-   init(sceneCoordinator: SceneCoordinatorType, network: NetworkLayerType, translation: TranslationLayerType) {
-      self.sceneCoordinator = sceneCoordinator
+    // MARK: - Init
+   init(network: NetworkLayerType, translation: TranslationLayerType) {
+      
       self.network = network
       self.translation = translation
       
@@ -34,6 +34,15 @@ class ListPostViewModel: ViewModelType {
    }
    
    fileprivate func loadData() {
+      
+      network.request()
+         .distinctUntilChanged()
+         .map { [weak self] data  in
+            guard let strongSelf = self else { return [] }
+             let result: ListPost = strongSelf.translation.decode(data: data)!
+            return result.data
+         }.bind(to: self.posts)
+         .disposed(by: bag)
       
    }
 }

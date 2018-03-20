@@ -1,37 +1,29 @@
 //
-//  DependencyRegistry.swift
+//  MainAssembly.swift
 //  SimpleAppDemo
 //
 //  Created by Hiem Seyha on 3/19/18.
 //  Copyright © 2018 seyha. All rights reserved.
 //
 
-import Foundation
+import UIKit
 import Swinject
 
-class DependencyRegistry: Assembly {
-  
-  func assemble(container: Container) {
-    
-    // Register ViewController calling
-    
-    
-    
-    // Register ViewModel calling
-    
-    
-    
-  }
-  
-  //MARK: - Register ViewController implementation
-  fileprivate func registerViewController(container:Container) {
-    
-  }
-  
-  //MARK: - Register ViewModel implementation
-  fileprivate func registerViewModel(container:Container) {
-    
-    
-  }
-  
+class DependencyRegistry {
+   
+   lazy var resolver: Resolver = {
+      return assembler!.resolver
+   }()
+   
+   
+   private var assembler: Assembler!
+   
+   
+   init() {
+      
+      assembler = Assembler()
+      assembler.apply(assembly: HomeVCAssembly())
+      
+   }
+   
 }

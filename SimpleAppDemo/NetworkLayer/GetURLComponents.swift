@@ -17,9 +17,9 @@ class GetURLRequest: URLConfigurationType, URLParameterConfigurationType {
   
   var path: String!
   
-  var parameters: [String : String]?
+  var parameters: [String : Any]?
   
-  init(path:String, parameters: [String: String]? = nil) {
+  init(path:String, parameters: [String: Any]? = nil) {
     self.parameters = parameters
     self.path = path
   }
@@ -42,8 +42,8 @@ class GetURLRequest: URLConfigurationType, URLParameterConfigurationType {
     var request = URLRequest(url: finalURL)
     
     request.httpMethod = method.rawValue
-    request.setValue(ContentType.json.rawValue,
-                     forHTTPHeaderField: HTTPHeaderField.acceptType.rawValue)
+    request.setValue(HTTPHeaderField.json,
+                     forHTTPHeaderField: HTTPHeaderField.acceptType)
     return request
   }
 }

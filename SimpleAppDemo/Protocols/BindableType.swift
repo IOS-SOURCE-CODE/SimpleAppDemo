@@ -11,7 +11,7 @@ import RxSwift
 import Action
 
 protocol BindableType {
-   associatedtype  T: ViewModelType
+   associatedtype  T
    
    var viewModel: T! { get set }
    

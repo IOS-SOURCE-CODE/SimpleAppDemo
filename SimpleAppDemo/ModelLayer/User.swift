@@ -13,6 +13,21 @@ struct User : Decodable {
    let fullName:String
    let profilePicture:String
    let username:String
+   
+   enum CodingKeys: String, CodingKey {
+      case id
+      case fullName  = "full_name"
+      case profilePicture = "profile_picture"
+      case username
+   }
+   
+   init(from decoder: Decoder) throws {
+      let values = try decoder.container(keyedBy: CodingKeys.self)
+      id = try values.decode(String.self, forKey: .id)
+      fullName = try values.decode(String.self, forKey: .fullName)
+      profilePicture = try values.decode(String.self, forKey: .profilePicture)
+      username = try values.decode(String.self, forKey: .username)
+   }
 }
 
 extension User: JSONDecodable {

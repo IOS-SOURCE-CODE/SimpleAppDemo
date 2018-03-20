@@ -32,11 +32,15 @@ final class NetworkLayer: NetworkLayerType {
    
    func request() -> Observable<Data> {
       
-      return Observable.create { observer in
+      return Observable.create { [weak self] observer in
          
-         let request = self.resource.urlRequest(baseURL: self.baseURL)
+         guard let strongSelf = self else {
+            fatalError("Cannot assess self from strong self in request")
+         }
          
-         let task = self.session.dataTask(with: request) { data, response, error in
+         let request = strongSelf.resource.urlRequest(baseURL: strongSelf.baseURL)
+         
+         let task = strongSelf.session.dataTask(with: request) { data, response, error in
             
             if let error = error {
                observer.onError(APIClientError.Other(error))
@@ -56,11 +60,10 @@ final class NetworkLayer: NetworkLayerType {
          
          task.resume()
          
-         return Disposables.create {
-            task.cancel()
-         }
+         return Disposables.create(with: task.cancel)
          
-         }.share(replay: 1, scope: .forever)
+         }
    }
+   
 }
 

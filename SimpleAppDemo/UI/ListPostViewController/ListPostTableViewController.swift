@@ -7,10 +7,14 @@
 //
 
 import UIKit
+import RxSwift
+import NSObject_Rx
+import RxCocoa
 
 class ListPostTableViewController: UITableViewController, BindableType {
    
    var viewModel: ListPostViewModel!
+   private let bag = DisposeBag()
    
    override func viewDidLoad() {
       super.viewDidLoad()
@@ -48,5 +52,28 @@ class ListPostTableViewController: UITableViewController, BindableType {
 extension ListPostTableViewController {
    func bindViewModel() {
       
+//      viewModel.posts.asObservable()
+//         .bind(to: tableView.rx.items(cellIdentifier: ListPostTableViewCell.identifier, cellType: ListPostTableViewCell.self))
+//         { index, model, cell in
+//
+//            debugPrint(model)
+//
+//         }.disposed(by: self.rx.disposeBag)
+      
+      viewModel.posts.asDriver()
+         .drive(onNext: { posts in
+            debugPrint(posts)
+         }).disposed(by: bag)
+//      viewModel.posts.asObservable().subscribe(onNext: { posts in
+//         debugPrint(posts)
+//      }).disposed(by: bag)
    }
 }
+
+
+
+
+
+
+
+

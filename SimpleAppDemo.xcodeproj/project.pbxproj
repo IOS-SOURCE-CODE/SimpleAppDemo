@@ -20,6 +20,7 @@
 		07C2F3152060BFF900005B63 /* Pagination.swift in Sources */ = {isa = PBXBuildFile; fileRef = 07C2F3142060BFF900005B63 /* Pagination.swift */; };
 		07C2F3182060C4B200005B63 /* DetailViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 07C2F3172060C4B200005B63 /* DetailViewModel.swift */; };
 		07C2F31A2060C85E00005B63 /* MainNavigationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 07C2F3192060C85E00005B63 /* MainNavigationController.swift */; };
+		07C2F31C2060E1D400005B63 /* ListPosts.swift in Sources */ = {isa = PBXBuildFile; fileRef = 07C2F31B2060E1D400005B63 /* ListPosts.swift */; };
 		4E318F10F3CE5C4882D2BAE3 /* Pods_SimpleAppDemoUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8466415AA17A866C069DBEC4 /* Pods_SimpleAppDemoUITests.framework */; };
 		716BFA41205FE8E900B074F9 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 716BFA40205FE8E900B074F9 /* AppDelegate.swift */; };
 		716BFA43205FE8E900B074F9 /* ListPostTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 716BFA42205FE8E900B074F9 /* ListPostTableViewController.swift */; };
@@ -39,8 +40,8 @@
 		716BFA87205FFEC600B074F9 /* TranslationLayerType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 716BFA86205FFEC600B074F9 /* TranslationLayerType.swift */; };
 		716BFA89205FFF1A00B074F9 /* APIClientError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 716BFA88205FFF1A00B074F9 /* APIClientError.swift */; };
 		716BFA8B2060004600B074F9 /* DetailPostViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 716BFA8A2060004600B074F9 /* DetailPostViewController.swift */; };
-		716BFA8E2060008800B074F9 /* DependencyRegistry.swift in Sources */ = {isa = PBXBuildFile; fileRef = 716BFA8D2060008800B074F9 /* DependencyRegistry.swift */; };
-		716BFA90206000C400B074F9 /* MainAssembly.swift in Sources */ = {isa = PBXBuildFile; fileRef = 716BFA8F206000C400B074F9 /* MainAssembly.swift */; };
+		716BFA8E2060008800B074F9 /* HomeVCAssembly.swift in Sources */ = {isa = PBXBuildFile; fileRef = 716BFA8D2060008800B074F9 /* HomeVCAssembly.swift */; };
+		716BFA90206000C400B074F9 /* DependencyRegistry.swift in Sources */ = {isa = PBXBuildFile; fileRef = 716BFA8F206000C400B074F9 /* DependencyRegistry.swift */; };
 		716BFA9320600E1700B074F9 /* ExtUImage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 716BFA9220600E1700B074F9 /* ExtUImage.swift */; };
 		716BFA9520600E4D00B074F9 /* ExtUITableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 716BFA9420600E4D00B074F9 /* ExtUITableView.swift */; };
 		716BFA9820600FA900B074F9 /* IdentifierReusable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 716BFA9720600FA900B074F9 /* IdentifierReusable.swift */; };
@@ -82,6 +83,7 @@
 		07C2F3142060BFF900005B63 /* Pagination.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Pagination.swift; sourceTree = "<group>"; };
 		07C2F3172060C4B200005B63 /* DetailViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailViewModel.swift; sourceTree = "<group>"; };
 		07C2F3192060C85E00005B63 /* MainNavigationController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainNavigationController.swift; sourceTree = "<group>"; };
+		07C2F31B2060E1D400005B63 /* ListPosts.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListPosts.swift; sourceTree = "<group>"; };
 		1247DF6DEFF2155A83657ED4 /* Pods-SimpleAppDemoUITests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SimpleAppDemoUITests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-SimpleAppDemoUITests/Pods-SimpleAppDemoUITests.debug.xcconfig"; sourceTree = "<group>"; };
 		15B75A5664CA781A0B4F89A0 /* Pods-SimpleAppDemo.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SimpleAppDemo.debug.xcconfig"; path = "Pods/Target Support Files/Pods-SimpleAppDemo/Pods-SimpleAppDemo.debug.xcconfig"; sourceTree = "<group>"; };
 		2A18AB8301D1C4EBA84BC415 /* Pods_SimpleAppDemo.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_SimpleAppDemo.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -111,8 +113,8 @@
 		716BFA86205FFEC600B074F9 /* TranslationLayerType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TranslationLayerType.swift; sourceTree = "<group>"; };
 		716BFA88205FFF1A00B074F9 /* APIClientError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIClientError.swift; sourceTree = "<group>"; };
 		716BFA8A2060004600B074F9 /* DetailPostViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailPostViewController.swift; sourceTree = "<group>"; };
-		716BFA8D2060008800B074F9 /* DependencyRegistry.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DependencyRegistry.swift; sourceTree = "<group>"; };
-		716BFA8F206000C400B074F9 /* MainAssembly.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainAssembly.swift; sourceTree = "<group>"; };
+		716BFA8D2060008800B074F9 /* HomeVCAssembly.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeVCAssembly.swift; sourceTree = "<group>"; };
+		716BFA8F206000C400B074F9 /* DependencyRegistry.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DependencyRegistry.swift; sourceTree = "<group>"; };
 		716BFA9220600E1700B074F9 /* ExtUImage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExtUImage.swift; sourceTree = "<group>"; };
 		716BFA9420600E4D00B074F9 /* ExtUITableView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExtUITableView.swift; sourceTree = "<group>"; };
 		716BFA9720600FA900B074F9 /* IdentifierReusable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IdentifierReusable.swift; sourceTree = "<group>"; };
@@ -161,6 +163,7 @@
 				07C2F30A2060B6EE00005B63 /* Images.swift */,
 				07C2F30C2060B94600005B63 /* Like.swift */,
 				07C2F3142060BFF900005B63 /* Pagination.swift */,
+				07C2F31B2060E1D400005B63 /* ListPosts.swift */,
 			);
 			path = ModelLayer;
 			sourceTree = "<group>";
@@ -307,8 +310,8 @@
 		716BFA8C2060005B00B074F9 /* Dependencies */ = {
 			isa = PBXGroup;
 			children = (
-				716BFA8D2060008800B074F9 /* DependencyRegistry.swift */,
-				716BFA8F206000C400B074F9 /* MainAssembly.swift */,
+				716BFA8D2060008800B074F9 /* HomeVCAssembly.swift */,
+				716BFA8F206000C400B074F9 /* DependencyRegistry.swift */,
 			);
 			path = Dependencies;
 			sourceTree = "<group>";
@@ -667,8 +670,9 @@
 				07C2F30B2060B6EE00005B63 /* Images.swift in Sources */,
 				716BFA43205FE8E900B074F9 /* ListPostTableViewController.swift in Sources */,
 				716BFA8B2060004600B074F9 /* DetailPostViewController.swift in Sources */,
-				716BFA90206000C400B074F9 /* MainAssembly.swift in Sources */,
-				716BFA8E2060008800B074F9 /* DependencyRegistry.swift in Sources */,
+				716BFA90206000C400B074F9 /* DependencyRegistry.swift in Sources */,
+				716BFA8E2060008800B074F9 /* HomeVCAssembly.swift in Sources */,
+				07C2F31C2060E1D400005B63 /* ListPosts.swift in Sources */,
 				716BFA84205FFE6B00B074F9 /* HTTPConfiguration.swift in Sources */,
 				07C2F31A2060C85E00005B63 /* MainNavigationController.swift in Sources */,
 				716BFA74205FFBB400B074F9 /* SceneCoordinator.swift in Sources */,

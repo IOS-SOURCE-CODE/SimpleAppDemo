@@ -21,8 +21,8 @@ class MainNavigationController: UINavigationController , MainNavigationControlle
    override func viewDidLoad() {
       super.viewDidLoad()
       
-      self.rx.didShow.skip(1).bind { [weak self] in
-         self?.sceneCoordinator.currentViewController = $0
+      self.rx.didShow.skip(1).bind {
+         SceneCoordinator.currentViewController = $0
       }.disposed(by: self.rx.disposeBag)
       
    }

@@ -11,15 +11,12 @@ import RxSwift
 
 protocol SceneCoordinatorType: class {
   
-  var currentViewController: UIViewController? { get set }
   
-  init(window: UIWindow, navigation: UINavigationController & MainNavigationControllerType)
-  
-  @discardableResult
-  func transition(to scene: Scene, type: SceneTransitionType) -> Completable
+   @discardableResult
+   static func transition(to scene: Scene, type: SceneTransitionType) -> Completable
   
   @discardableResult
-  func pop(animated: Bool) -> Completable
+  static func pop(animated: Bool) -> Completable
   
   
 }
@@ -27,7 +24,7 @@ protocol SceneCoordinatorType: class {
 extension SceneCoordinatorType {
   
   @discardableResult
-  func pop() -> Completable {
+  static func pop() -> Completable {
     return pop(animated: true)
   }
 }

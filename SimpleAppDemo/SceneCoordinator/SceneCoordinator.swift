@@ -11,16 +11,19 @@ import RxSwift
 
 class SceneCoordinator {
   
-  fileprivate var window: UIWindow!
-  var currentViewController: UIViewController?
-  
-  required init(window: UIWindow, navigation: UINavigationController & MainNavigationControllerType) {
-    self.window = window
+   static var currentViewController: UIViewController?
+   static var window: UIWindow!
+   init(window: UIWindow, navigation: UINavigationController) {
+
     window.rootViewController = navigation
-   
-   currentViewController = navigation.viewControllers.first
     window.makeKeyAndVisible()
   }
+   
+   private init() {}
+   
+   static let share : SceneCoordinator =  {
+      return SceneCoordinator()
+   }()
   
   static func actualViewController(for viewController: UIViewController) -> UIViewController {
     if let navigationController = viewController as? UINavigationController {
@@ -33,9 +36,11 @@ class SceneCoordinator {
 
 
 extension SceneCoordinator : SceneCoordinatorType {
+   
+   typealias me = SceneCoordinator
   
   @discardableResult
-  func transition(to scene: Scene, type: SceneTransitionType) -> Completable {
+   static func transition(to scene: Scene, type: SceneTransitionType) -> Completable {
     
     let subject = PublishSubject<Void>()
     let viewController = scene.viewController()
@@ -57,27 +62,28 @@ extension SceneCoordinator : SceneCoordinatorType {
         .bind(to: subject)
       
       navigationController.pushViewController(viewController, animated: true)
-      currentViewController = SceneCoordinator.actualViewController(for: viewController)
+      currentViewController = me.actualViewController(for: viewController)
       
     case .modal:
       currentViewController?.present(viewController, animated: true, completion: {
         subject.onCompleted()
       })
       
-      currentViewController = SceneCoordinator.actualViewController(for: viewController)
+      currentViewController = me.actualViewController(for: viewController)
     }
     
     return subject.asObserver().take(1).ignoreElements()
   }
   
   @discardableResult
-  func pop(animated: Bool) -> Completable {
+  static func pop(animated: Bool) -> Completable {
     
     let subject = PublishSubject<Void>()
     
     if let presenter = currentViewController?.presentingViewController {
       currentViewController?.dismiss(animated: animated, completion: {
-        self.currentViewController = SceneCoordinator.actualViewController(for: presenter)
+         
+         me.currentViewController = me.actualViewController(for: presenter)
         subject.onCompleted()
       })
     } else if let navigationController = currentViewController?.navigationController {

@@ -9,7 +9,7 @@
 import Foundation
 
 protocol URLParameterConfigurationType {
-  var parameters: [String: String]? { get }
+  var parameters: [String: Any]? { get }
 }
 
 protocol URLBodyConfigurationType {

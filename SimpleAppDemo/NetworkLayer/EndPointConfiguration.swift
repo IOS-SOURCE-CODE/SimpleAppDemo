@@ -12,8 +12,6 @@ import Foundation
 
 struct EndPoint: EndPointConfigurationActiveType {
    
-   private typealias me = EndPoint
-   
    static var active: String!
    
    enum Post: String {
@@ -22,7 +20,7 @@ struct EndPoint: EndPointConfigurationActiveType {
       public var value: String {
          switch self {
          case .get:
-            return me.active + "users/7322641520/media/recent"
+            return "users/7322641520/media/recent"
          }
       }
    }

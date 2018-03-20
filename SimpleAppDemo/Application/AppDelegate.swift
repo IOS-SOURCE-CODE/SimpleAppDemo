@@ -12,7 +12,8 @@ import UIKit
 class AppDelegate: UIResponder, UIApplicationDelegate {
    
    var window: UIWindow?
-   
+  
+   var dependencyRegistry: DependencyRegistry!
    
    func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
       
@@ -22,33 +23,14 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
       // MARK: Change endpoint production or development
       EndPoint.active = EndPointConfiguration.production.active
       
-     
-      
-      let url = URL(string: EndPoint.Post.get.value)!
-      let paramater = [HTTPHeaderField.acceptType.rawValue:  Authentication.apiKey]
-      let urlRequest = GetURLRequest(path: EndPoint.Post.get.value, parameters: paramater)
-      let network = NetworkLayer(baseURL: url, urlRequest: urlRequest)
-      let translation = TranslationLayer()
-      
-      let viewController = ListPostTableViewController()
-      
-      let navigation = MainNavigationController(rootViewController: viewController)
-      
-      let scene = SceneCoordinator(window: window!, navigation: navigation)
-      
-      navigation.sceneCoordinator = scene
-      
-      
-      let viewModel = ListPostViewModel(sceneCoordinator: scene, network: network, translation: translation)
-      
-      scene.transition(to: .home(viewModel: viewModel), type: .home)
-      
-
-      
-      
+      dependencyRegistry = DependencyRegistry()
+      SceneCoordinator.window = window
+      let viewModel = dependencyRegistry.resolver.resolve(ListPostViewModel.self)!
+      SceneCoordinator.transition(to: .home(viewModel: viewModel), type: .root)
       
       return true
    }
+   
    
    func applicationWillResignActive(_ application: UIApplication) {
       

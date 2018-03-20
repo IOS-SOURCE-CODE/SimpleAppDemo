@@ -12,28 +12,45 @@ import Foundation
 typealias JSONDictionary = [String: Any]
 
 protocol JSONDecodable {
-  init?(dictionary: JSONDictionary)
+   init?(dictionary: JSONDictionary)
 }
 
 protocol TranslationLayerType {
-  func decodes<E: JSONDecodable>(data: Data) -> [E]
+   func decodes<E: JSONDecodable & Decodable>(data: Data) -> [E]
+   func decode<E: JSONDecodable & Decodable>(data: Data) -> E?
 }
 
 
 class TranslationLayer: TranslationLayerType {
-  
-  func decodes<E: JSONDecodable>(data: Data) -> [E] {
-    
-    do {
-      guard let json = try? JSONDecoder().decode([E].self, from: data)
-        else { throw APIClientError.CouldNotDecodeJSON  }
+   
+   func decodes<E: JSONDecodable & Decodable>(data: Data) -> [E] {
       
-      return json
-    } catch (let error) {
-      debugPrint(error)
-    }
-    
-    return []
-  }
-  
+      do {
+         guard let json = try? JSONDecoder().decode([E].self, from: data)
+            else { throw APIClientError.CouldNotDecodeJSON  }
+         
+         return json
+      } catch (let error) {
+         debugPrint(error)
+      }
+      
+      return []
+   }
+   
+   func decode<E:JSONDecodable & Decodable>(data: Data) -> E? {
+      
+      do {
+         
+        guard let jsonData = try? JSONDecoder().decode(E.self, from: data) else { throw APIClientError.CouldNotDecodeJSON }
+         
+         return jsonData
+         
+      } catch (let error) {
+         debugPrint(error)
+      }
+      
+      return nil
+   }
+   
+   
 }

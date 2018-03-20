@@ -9,7 +9,7 @@
 import Foundation
 
 enum SceneTransitionType {
-   case home
+   case root
   case push
   case modal
 }
