@@ -16,7 +16,7 @@ class ListPostTableViewController: UIViewController, BindableType {
    var viewModel: ListPostViewModel!
    private let bag = DisposeBag()
    var tableView: UITableView!
-  var isLoading = Observable.just(true)
+
   
   lazy var loadingView:UIActivityIndicatorView = {
     let activityIndicator = UIActivityIndicatorView(activityIndicatorStyle: .gray)
@@ -65,10 +65,10 @@ class ListPostTableViewController: UIViewController, BindableType {
       tableView = UITableView(frame: self.view.bounds)
       self.view.addSubview(tableView)
       tableView.register(ListPostTableViewCell.self)
-//      tableView.estimatedRowHeight = 320
+      self.tableView.delegate = self
       tableView.rowHeight = 455
-    tableView.separatorStyle = .none
-    tableView.isHidden = true
+      tableView.separatorStyle = .none
+      tableView.isHidden = true
     
    }
   fileprivate func setupLoadingView() {
@@ -94,13 +94,33 @@ extension ListPostTableViewController {
         self?.refresher.endRefreshing()
       })
       .drive(tableView.rx.items(cellIdentifier: ListPostTableViewCell.identifier, cellType:  ListPostTableViewCell.self)) { index, model, cell in
+         
         cell.configure(with: model)
-        debugPrint("table view \(model)" )
+       
       }.disposed(by: self.rx.disposeBag)
    }
 }
 
+extension ListPostTableViewController: UITableViewDelegate {
 
+   
+   func scrollViewDidScroll(_ scrollView: UIScrollView) {
+      
+      let scrollViewHeight = scrollView.frame.size.height
+      let scrollViewContentSize = scrollView.contentSize.height
+      let contentLarger = (scrollViewContentSize > scrollViewHeight)
+      
+      let viewableHeight = contentLarger ? scrollViewHeight : scrollViewContentSize
+      
+      let loadable = (scrollView.contentOffset.y >= scrollView.contentSize.height - viewableHeight + 50)
+      
+      if loadable {
+       
+         viewModel.fetchMorePage()
+      }
+   }
+
+}
 
 
 

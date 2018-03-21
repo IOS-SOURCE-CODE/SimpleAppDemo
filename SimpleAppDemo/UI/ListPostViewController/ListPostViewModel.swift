@@ -13,7 +13,7 @@ class ListPostViewModel {
    
    
    // MARK - Constrant
-    private let bag = DisposeBag()
+   private let bag = DisposeBag()
    
    
    // MAKR: - Output
@@ -24,7 +24,7 @@ class ListPostViewModel {
    let network: NetworkLayerType
    let translation: TranslationLayerType
    
-    // MARK: - Init
+   // MARK: - Init
    init(network: NetworkLayerType, translation: TranslationLayerType) {
       
       self.network = network
@@ -32,27 +32,47 @@ class ListPostViewModel {
       
       loadData()
    }
-  
-  func loadMore() {
-    
-    
-  }
-  
-  func loadData() {
+   
+   func fetchMorePage() {
       
-      network.request()
-          .asObservable()
-        .do( onCompleted: {
-          debugPrint("vm completed")
-        })
+      guard let nextString = pagination.value?.nextUrl else { return }
+      let nextUrl = URL(string: nextString)!
+      let urlRequest = URLRequest(url: nextUrl)
+
+      network.response(request: urlRequest).asObservable()
          .distinctUntilChanged()
          .map { [weak self] data  in
             guard let strongSelf = self else { return [] }
-             let result: ListPost = strongSelf.translation.decode(data: data)!
+            guard let result: ListPost = strongSelf.translation.decode(data: data) else { return [] }
+            strongSelf.pagination.value = result.pagination
             return result.data
-         }.bind(to: self.posts)
+         }.catchErrorJustReturn([])
+         .subscribe(onNext: { newpost in
+            self.posts.value.append(contentsOf: newpost as [Post])
+         })
          .disposed(by: bag)
-    
+      
+   }
+   
+   var loadMore: Observable<Void> {
+      fetchMorePage()
+      return .empty()
+   }
+   
+   func loadData() {
+      
+      network.request()
+         .asObservable()
+         .distinctUntilChanged()
+         .map { [weak self] data  in
+            guard let strongSelf = self else { return [] }
+            let result: ListPost = strongSelf.translation.decode(data: data)!
+            strongSelf.pagination.value = result.pagination
+            return result.data
+         }.catchErrorJustReturn([])
+         .bind(to: self.posts)
+         .disposed(by: bag)
+      
       
    }
 }

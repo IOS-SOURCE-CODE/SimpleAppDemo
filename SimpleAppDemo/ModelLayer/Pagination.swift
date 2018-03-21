@@ -17,6 +17,12 @@ struct Pagination : Decodable {
       case nextMaxId = "next_max_id"
       case nextUrl = "next_url"
    }
+   init(from decoder: Decoder) throws {
+      let values = try decoder.container(keyedBy: CodingKeys.self)
+      nextMaxId = try values.decode(String.self, forKey:.nextMaxId)
+      nextUrl = try values.decode(String.self, forKey: .nextUrl)
+   }
+   
    
 }
 

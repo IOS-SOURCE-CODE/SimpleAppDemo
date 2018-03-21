@@ -27,7 +27,7 @@ protocol URLConfigurationType {
 
 extension URLConfigurationType {
   
-  func component(baseURL: URL) -> NSURLComponents {
+   func component(baseURL: URL) -> NSURLComponents {
     
     let url = baseURL.appendingPathComponent(path)
     
