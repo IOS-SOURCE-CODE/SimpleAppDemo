@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		079F10A420623E4400D7349D /* ReachabilityManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 079F10A320623E4400D7349D /* ReachabilityManager.swift */; };
 		07C2F3002060ACFE00005B63 /* NetworkLayer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 07C2F2FF2060ACFE00005B63 /* NetworkLayer.swift */; };
 		07C2F3022060B34600005B63 /* BindableType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 07C2F3012060B34600005B63 /* BindableType.swift */; };
 		07C2F3042060B3B300005B63 /* ListPostViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 07C2F3032060B3B300005B63 /* ListPostViewModel.swift */; };
@@ -70,6 +71,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		079F10A320623E4400D7349D /* ReachabilityManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ReachabilityManager.swift; sourceTree = "<group>"; };
 		07C2F2FF2060ACFE00005B63 /* NetworkLayer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkLayer.swift; sourceTree = "<group>"; };
 		07C2F3012060B34600005B63 /* BindableType.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BindableType.swift; sourceTree = "<group>"; };
 		07C2F3032060B3B300005B63 /* ListPostViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListPostViewModel.swift; sourceTree = "<group>"; };
@@ -155,6 +157,14 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		079F10A220623E1200D7349D /* Helper */ = {
+			isa = PBXGroup;
+			children = (
+				079F10A320623E4400D7349D /* ReachabilityManager.swift */,
+			);
+			path = Helper;
+			sourceTree = "<group>";
+		};
 		07C2F3052060B5C700005B63 /* ModelLayer */ = {
 			isa = PBXGroup;
 			children = (
@@ -212,6 +222,7 @@
 		716BFA3F205FE8E900B074F9 /* SimpleAppDemo */ = {
 			isa = PBXGroup;
 			children = (
+				079F10A220623E1200D7349D /* Helper */,
 				07C2F3052060B5C700005B63 /* ModelLayer */,
 				716BFA9620600F8900B074F9 /* Protocols */,
 				716BFA8C2060005B00B074F9 /* Dependencies */,
@@ -602,6 +613,7 @@
 				"${BUILT_PRODUCTS_DIR}/Action/Action.framework",
 				"${BUILT_PRODUCTS_DIR}/Kingfisher/Kingfisher.framework",
 				"${BUILT_PRODUCTS_DIR}/NSObject+Rx/NSObject_Rx.framework",
+				"${BUILT_PRODUCTS_DIR}/ReachabilitySwift/ReachabilitySwift.framework",
 				"${BUILT_PRODUCTS_DIR}/RxCocoa/RxCocoa.framework",
 				"${BUILT_PRODUCTS_DIR}/RxSwift/RxSwift.framework",
 				"${BUILT_PRODUCTS_DIR}/SnapKit/SnapKit.framework",
@@ -612,6 +624,7 @@
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Action.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Kingfisher.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/NSObject_Rx.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/ReachabilitySwift.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/RxCocoa.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/RxSwift.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SnapKit.framework",
@@ -669,6 +682,7 @@
 				07C2F3112060BC8900005B63 /* EndPointConfiguration.swift in Sources */,
 				07C2F30B2060B6EE00005B63 /* Images.swift in Sources */,
 				716BFA43205FE8E900B074F9 /* ListPostTableViewController.swift in Sources */,
+				079F10A420623E4400D7349D /* ReachabilityManager.swift in Sources */,
 				716BFA8B2060004600B074F9 /* DetailPostViewController.swift in Sources */,
 				716BFA90206000C400B074F9 /* DependencyRegistry.swift in Sources */,
 				716BFA8E2060008800B074F9 /* HomeVCAssembly.swift in Sources */,
@@ -861,6 +875,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = KBWN3BETTA;
 				INFOPLIST_FILE = SimpleAppDemo/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.seyha.SimpleAppDemo;
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -877,6 +892,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = KBWN3BETTA;
 				INFOPLIST_FILE = SimpleAppDemo/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.seyha.SimpleAppDemo;
 				PRODUCT_NAME = "$(TARGET_NAME)";

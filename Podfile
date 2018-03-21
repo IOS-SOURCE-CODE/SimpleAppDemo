@@ -24,6 +24,9 @@ target 'SimpleAppDemo' do
   
   # Cache Image
   pod 'Kingfisher', '~> 4.0'
+  
+  # Check internet connection
+  pod 'ReachabilitySwift', '~> 3'
 
   target 'SimpleAppDemoTests' do
     inherit! :search_paths

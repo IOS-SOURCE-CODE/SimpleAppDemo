@@ -28,7 +28,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
       let viewModel = dependencyRegistry.resolver.resolve(ListPostViewModel.self)!
       SceneCoordinator.transition(to: .home(viewModel: viewModel), type: .root)
     
-    
+      
+      ReachabilityManager.shared.startMonitoring()
       
       return true
    }

@@ -12,9 +12,9 @@ import RxSwift
 class ListPostViewModel {
    
    
-   // MARK - Constrant
+   // MARK - Internal Access
    private let bag = DisposeBag()
-   
+   private var isShouldFetch = true
    
    // MAKR: - Output
    var posts = Variable<[Post]>([])
@@ -54,16 +54,21 @@ class ListPostViewModel {
       
    }
    
-   var loadMore: Observable<Void> {
-      fetchMorePage()
-      return .empty()
+   fileprivate func loadData() {
+      ReachabilityManager.shared.isConnected
+      .subscribe(onNext: { [weak self] value in
+         self?.fetchPosts(isOnline: value)
+      }).disposed(by: bag)
    }
    
-   func loadData() {
-      
+   func fetchPosts(isOnline: Bool) {
       network.request()
          .asObservable()
+         .filter { _ in return isOnline }
          .distinctUntilChanged()
+         .do(onError: { (error) in
+            debugPrint("error ======= \(error)")
+         })
          .map { [weak self] data  in
             guard let strongSelf = self else { return [] }
             let result: ListPost = strongSelf.translation.decode(data: data)!
@@ -72,7 +77,5 @@ class ListPostViewModel {
          }.catchErrorJustReturn([])
          .bind(to: self.posts)
          .disposed(by: bag)
-      
-      
    }
 }

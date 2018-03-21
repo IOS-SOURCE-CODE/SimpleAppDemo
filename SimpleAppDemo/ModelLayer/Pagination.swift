@@ -10,8 +10,8 @@ import Foundation
 
 
 struct Pagination : Decodable {
-   let nextMaxId: String
-   let nextUrl: String
+   var nextMaxId: String?
+   var nextUrl: String?
    
    enum CodingKeys: String, CodingKey {
       case nextMaxId = "next_max_id"

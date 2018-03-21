@@ -11,12 +11,13 @@ import RxSwift
 import NSObject_Rx
 import RxCocoa
 
+
 class ListPostTableViewController: UIViewController, BindableType {
    
    var viewModel: ListPostViewModel!
    private let bag = DisposeBag()
    var tableView: UITableView!
-
+   var isLoading = false
   
   lazy var loadingView:UIActivityIndicatorView = {
     let activityIndicator = UIActivityIndicatorView(activityIndicatorStyle: .gray)
@@ -41,12 +42,15 @@ class ListPostTableViewController: UIViewController, BindableType {
       setupLoadingView()
       setupTableView()
       tableView.addSubview(refresher)
-    
+      
+      
+      ReachabilityManager.shared.isConnected
+         .subscribe(onNext: { [weak self] value in
+            self?.isLoading = value
+         }).disposed(by: bag)
       
    }
   
-  
-   
    //MARK: - Setup View appearance
    fileprivate func setupAppearance() {
       view.backgroundColor = .white
@@ -77,27 +81,41 @@ class ListPostTableViewController: UIViewController, BindableType {
     loadingView.startAnimating()
   }
   
-  @objc func refreshing() {
-    viewModel.loadData()
-  }
+   @objc func refreshing() {
+      
+      guard isLoading else {
+          refresher.endRefreshing()
+         return
+      }
+      
+      viewModel.fetchPosts(isOnline: isLoading)
+     
+   }
 }
 
 
 extension ListPostTableViewController {
    func bindViewModel() {
-    
-    viewModel.posts.asDriver()
-      .do(onNext: { [weak self] posts in
-        guard posts.count > 0 else { return }
-        self?.tableView.isHidden = false
-        self?.loadingView.stopAnimating()
-        self?.refresher.endRefreshing()
-      })
-      .drive(tableView.rx.items(cellIdentifier: ListPostTableViewCell.identifier, cellType:  ListPostTableViewCell.self)) { index, model, cell in
-         
-        cell.configure(with: model)
-       
-      }.disposed(by: self.rx.disposeBag)
+      
+      viewModel.posts.asDriver()
+         .filter { [weak self] _ in
+            if self?.isLoading == false {
+               self?.loadingView.stopAnimating()
+            }
+            return (self?.isLoading)!
+         }
+         .do(onNext: { [weak self] posts in
+            guard posts.count > 0 else { return }
+            self?.tableView.isHidden = false
+            self?.loadingView.stopAnimating()
+            self?.refresher.endRefreshing()
+         })
+         .drive(tableView.rx.items(cellIdentifier: ListPostTableViewCell.identifier, cellType:  ListPostTableViewCell.self)) { index, model, cell in
+            
+            cell.configure(with: model)
+            
+         }.disposed(by: self.rx.disposeBag)
+      
    }
 }
 
@@ -115,7 +133,7 @@ extension ListPostTableViewController: UITableViewDelegate {
       let loadable = (scrollView.contentOffset.y >= scrollView.contentSize.height - viewableHeight + 50)
       
       if loadable {
-       
+         guard isLoading else { return }
          viewModel.fetchMorePage()
       }
    }
