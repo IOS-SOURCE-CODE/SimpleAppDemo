@@ -9,20 +9,32 @@
 import Foundation
 
 
-struct Pagination : Decodable {
+struct Pagination : Decodable, Equatable {
    var nextMaxId: String?
    var nextUrl: String?
    
    enum CodingKeys: String, CodingKey {
+      
       case nextMaxId = "next_max_id"
       case nextUrl = "next_url"
    }
+   
+   
    init(from decoder: Decoder) throws {
-      let values = try decoder.container(keyedBy: CodingKeys.self)
-      nextMaxId = try values.decode(String.self, forKey:.nextMaxId)
-      nextUrl = try values.decode(String.self, forKey: .nextUrl)
+      if let values = try? decoder.container(keyedBy: CodingKeys.self) {
+         nextMaxId = try values.decode(String.self, forKey:.nextMaxId)
+         nextUrl = try values.decode(String.self, forKey: .nextUrl)
+      } else {
+         nextUrl = nil
+         nextMaxId = nil
+      }
    }
    
+   
+   static func ==(lhs: Pagination, rhs: Pagination) -> Bool {
+      return (lhs.nextMaxId == rhs.nextMaxId
+         && lhs.nextUrl == rhs.nextUrl)
+   }
    
 }
 

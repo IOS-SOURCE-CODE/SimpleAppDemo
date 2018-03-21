@@ -10,7 +10,7 @@ import Foundation
 
 struct ListPost: Decodable {
    var data: [Post]
-   var pagination: Pagination
+   var pagination: Pagination?
    
    enum CodingKeys: String, CodingKey {
       case data
@@ -20,7 +20,14 @@ struct ListPost: Decodable {
    init(from decoder: Decoder) throws {
       let values = try decoder.container(keyedBy: CodingKeys.self)
       data = try values.decode([Post].self, forKey: .data)
-      pagination = try values.decode(Pagination.self, forKey: .pagination)
+      if let prepagination = try? values.decode(Pagination.self, forKey: .pagination)  {
+        self.pagination = prepagination
+      } else {
+         pagination?.nextMaxId = nil
+         pagination?.nextUrl = nil
+      }
+      
+      
    }
 }
 
