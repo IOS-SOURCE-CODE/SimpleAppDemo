@@ -12,7 +12,7 @@ import NSObject_Rx
 import RxCocoa
 
 
-class ListPostTableViewController: UIViewController, BindableType {
+class ListPostViewController: UIViewController, BindableType {
    
    var viewModel: ListPostViewModel!
    private let bag = DisposeBag()
@@ -71,7 +71,6 @@ class ListPostTableViewController: UIViewController, BindableType {
       tableView.delegate = self
       tableView.rowHeight = 500
       tableView.separatorStyle = .none
-      tableView.isHidden = true
     
    }
   fileprivate func setupLoadingView() {
@@ -86,18 +85,17 @@ class ListPostTableViewController: UIViewController, BindableType {
           refresher.endRefreshing()
          return
       }
-      viewModel.fetchPosts(isOnline: isLoading)
+      viewModel.loadData()
    }
 }
 
 
-extension ListPostTableViewController {
+extension ListPostViewController {
    func bindViewModel() {
       
       viewModel.posts.asDriver()
          .do(onNext: { [weak self] posts in
             guard posts.count > 0 else { return }
-            self?.tableView.isHidden = false
             self?.loadingView.stopAnimating()
             self?.refresher.endRefreshing()
          })
@@ -120,18 +118,24 @@ extension ListPostTableViewController {
    }
 }
 
-extension ListPostTableViewController: UITableViewDelegate {
+extension ListPostViewController: UITableViewDelegate {
 
-   func scrollViewDidEndDragging(_ scrollView: UIScrollView, willDecelerate decelerate: Bool) {
-
-      let currentOffset = scrollView.contentOffset.y
-      let maximumOffset = scrollView.contentSize.height - scrollView.frame.size.height
-
-      if maximumOffset - currentOffset <= 10.0 {
-         viewModel.fetchMorePage()
-      }
-  }
-
+//   func scrollViewDidEndDragging(_ scrollView: UIScrollView, willDecelerate decelerate: Bool) {
+//
+//      let currentOffset = scrollView.contentOffset.y
+//      let maximumOffset = scrollView.contentSize.height - scrollView.frame.size.height
+//
+//      if maximumOffset - currentOffset <= 10.0 {
+//         viewModel.fetchMorePage()
+//      }
+//  }
+   
+   func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
+      
+     
+      
+      
+   }
 
 }
 

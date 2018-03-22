@@ -42,45 +42,52 @@ class ListPostViewModel {
   
    func fetchMorePage() {
       //TODO: Fix this stuff
-         guard let nextUrl = self.pagination.value?.next_url else { return }
-         let urlRequest = URLRequest(url: nextUrl)
-         
-         self.network.response(request: urlRequest).asObservable()
-            .map { [weak self] data  in
-               self?.responseJSON(with: data)
-            }
-            .map {  [weak self] newpost in
-               guard let result = newpost else { return [] }
-               _ = result.map { self?.posts.value.append($0) }
-               return (self?.posts.value)!
-            }
-            .catchErrorJustReturn([])
-            .bind(to: self.posts)
-            .disposed(by: self.bag)
-   }
-   
-   func fetchPosts(isOnline: Bool) {
-      network.request()
-         .asObservable()
+      guard let nextUrl = self.pagination.value?.next_url else { return }
+      
+      let urlRequest = URLRequest(url: nextUrl)
+      
+      self.network.response(request: urlRequest).asObservable()
          .map { [weak self] data  in
-            guard let strongSelf = self else { return [] }
-            return strongSelf.responseJSON(with: data)
+            self?.responseJSON(with: data)
          }
+         .map {  [weak self] newpost in
+            guard let result = newpost else { return [] }
+            _ = result.map { self?.posts.value.append($0) }
+            return (self?.posts.value)!
+         }
+         .distinctUntilChanged()
          .catchErrorJustReturn([])
          .bind(to: self.posts)
-         .disposed(by: bag)
+         .disposed(by: self.bag)
    }
+   
+   
+   func loadData() {
+      
+      ReachabilityManager.shared.isConnected
+         .subscribe(onNext: { value in
+            if value { request() }
+         }).disposed(by: bag)
+      
+      func request() {
+         network.request()
+            .asObservable()
+            .map { [weak self] data  in
+               guard let strongSelf = self else { return [] }
+               return strongSelf.responseJSON(with: data)
+            }
+            .distinctUntilChanged()
+            .catchErrorJustReturn([])
+            .bind(to: self.posts)
+           
+            .disposed(by: bag)
+      }
+   }
+   
 }
 
 //MARK: - Helper
 extension ListPostViewModel {
-   
-   fileprivate func loadData() {
-      ReachabilityManager.shared.isConnected
-         .subscribe(onNext: { [weak self] value in
-            self?.fetchPosts(isOnline: value)
-         }).disposed(by: bag)
-   }
    
    fileprivate func responseJSON(with data: Data?) -> [Post] {
       guard let responseData = data else { return [] }
@@ -89,3 +96,5 @@ extension ListPostViewModel {
       return result.data
    }
 }
+
+

@@ -13,13 +13,17 @@ import ReachabilitySwift
 
 class ReachabilityManager: NSObject {
     
-    static let shared = ReachabilityManager()
+   static let shared : ReachabilityManager = {
+      return ReachabilityManager()
+   }()
     
     var isNetworkAvailable: Bool {
         return reachabilityStatus != .notReachable
     }
    
-   var isConnected = PublishSubject<Bool>()
+   private override init(){}
+   
+   var isConnected = BehaviorSubject(value: false)
     
     var reachabilityStatus: Reachability.NetworkStatus = .notReachable
     
@@ -36,42 +40,37 @@ class ReachabilityManager: NSObject {
         case .reachableViaWiFi:
             reachabilityStatus = .reachableViaWiFi
             isConnected.onNext(isNetworkAvailable)
-            debugPrint("============ reachableViaWiFi ", isNetworkAvailable)
+            debugPrint("============ reachableViaWiFi :", isNetworkAvailable)
             
         case .reachableViaWWAN:
             reachabilityStatus = .reachableViaWWAN
             isConnected.onNext(isNetworkAvailable)
-            debugPrint("============ reachableViaWWAN ", isNetworkAvailable)
+            debugPrint("============ reachableViaWWAN :", isNetworkAvailable)
         case .notReachable:
             reachabilityStatus = .notReachable
             isConnected.onNext(isNetworkAvailable)
-             debugPrint("============ notReachable ", isNetworkAvailable)
+            debugPrint("============ notReachable :", isNetworkAvailable)
          
         }
     }
     
     // Start Monitoring wifi
-    func startMonitoring() {
-        
-        NotificationCenter.default.addObserver(self, selector: #selector(self.reachabilityChanged),
-                                               name: ReachabilityChangedNotification, object: reachability)
-    
-        do {
-            
-            try reachability.startNotifier()
-            
-        } catch {
-            
-            debugPrint("Could not start reachability notifier")
-        }
-    }
+   func startMonitoring() {
+      
+      NotificationCenter.default.addObserver(self, selector: #selector(self.reachabilityChanged),
+         name: ReachabilityChangedNotification, object: reachability)
+      
+      do {
+         try reachability.startNotifier()
+      } catch {
+         debugPrint("Could not start reachability notifier")
+      }
+   }
    
     // Stop Monitoring wifi
     func stopMonitoring() {
-        
         reachability.stopNotifier()
         NotificationCenter.default.removeObserver(self, name: ReachabilityChangedNotification, object: reachability)
-       
     }
 
 }

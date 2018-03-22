@@ -12,20 +12,16 @@ import UIKit
 extension Scene {
   
   func viewController() -> UIViewController {
-    
+   
     switch self {
-      
     case .home(let viewModel):
-      var listPost = ListPostTableViewController()
-  
-      listPost.bindViewModel(to: viewModel)
-      return listPost
+      return
+         AppDelegate.dependency.resolver.resolve(ListPostViewController.self, argument: viewModel)!
       
     case .detail(let viewModel):
-         var detail = DetailPostViewController()
-         detail.bindViewModel(to: viewModel)
-         return detail
+        return
+         AppDelegate.dependency.resolver.resolve(DetailPostViewController.self, argument: viewModel)!
     }
+   
   }
-  
 }

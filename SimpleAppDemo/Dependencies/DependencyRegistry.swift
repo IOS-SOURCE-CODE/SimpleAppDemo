@@ -10,20 +10,12 @@ import UIKit
 import Swinject
 
 class DependencyRegistry {
-   
    lazy var resolver: Resolver = {
       return assembler!.resolver
    }()
-   
-   
    private var assembler: Assembler!
-   
-   
    init() {
-      
       assembler = Assembler()
-      assembler.apply(assembly: HomeVCAssembly())
-      
+      assembler.apply(assembly: ObjectsAssembly())
    }
-   
 }

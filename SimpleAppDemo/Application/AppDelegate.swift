@@ -20,41 +20,25 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
       window = UIWindow(frame: UIScreen.main.bounds)
       window?.makeKeyAndVisible()
       
+      ReachabilityManager.shared.startMonitoring()
+      
       // MARK: Change endpoint production or development
       EndPoint.active = EndPointConfiguration.production.active
       
       dependencyRegistry = DependencyRegistry()
       SceneCoordinator.window = window
       let viewModel = dependencyRegistry.resolver.resolve(ListPostViewModel.self)!
-      SceneCoordinator.transition(to: .home(viewModel: viewModel), type: .root)
-    
       
-      ReachabilityManager.shared.startMonitoring()
+      SceneCoordinator.transition(to: .home(viewModel: viewModel), type: .root)
+
       
       return true
    }
    
-   
-   func applicationWillResignActive(_ application: UIApplication) {
-      
-   }
-   
-   func applicationDidEnterBackground(_ application: UIApplication) {
-      
-   }
-   
-   func applicationWillEnterForeground(_ application: UIApplication) {
-      
-   }
-   
-   func applicationDidBecomeActive(_ application: UIApplication) {
-      
-   }
-   
-   func applicationWillTerminate(_ application: UIApplication) {
-      
-   }
-   
+   static var dependency: DependencyRegistry = {
+      let appDelegate =  UIApplication.shared.delegate as! AppDelegate
+      return appDelegate.dependencyRegistry
+   }()
    
 }
 

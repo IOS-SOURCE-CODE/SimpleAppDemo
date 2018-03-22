@@ -9,16 +9,17 @@
 import Foundation
 import Swinject
 
-class HomeVCAssembly: Assembly {
+class ObjectsAssembly: Assembly {
   
   func assemble(container: Container) {
     
-    // Register ViewController calling
-    registerViewModel(container: container)
-    
-    
+   
     // Register ViewModel calling
     registerViewModel(container: container)
+    
+    
+   // Register ViewController calling
+    registerViewController(container: container)
    
    
    // Register layer calling
@@ -28,6 +29,21 @@ class HomeVCAssembly: Assembly {
   
   //MARK: - Register ViewController implementation
   fileprivate func registerViewController(container:Container) {
+   
+   container.register(ListPostViewController.self) { (r , viewModel:ListPostViewModel) in
+      
+      var listPost = ListPostViewController()
+      listPost.bindViewModel(to: viewModel)
+      return listPost
+      
+   }.inObjectScope(.weak)
+   
+   container.register(DetailPostViewController.self) { (r , viewModel: DetailViewModel)  in
+      
+      var detail = DetailPostViewController()
+      detail.bindViewModel(to: viewModel)
+      return detail
+   }.inObjectScope(.weak)
    
   }
   

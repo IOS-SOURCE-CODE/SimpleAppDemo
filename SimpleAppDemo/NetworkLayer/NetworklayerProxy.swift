@@ -17,15 +17,11 @@ final class NetworkLayerProxy: NetworkLayerType {
    
    init(network: NetworkLayerType) {
       self.realNetworklayer = network
-      
-      ReachabilityManager.shared.isConnected
-         .subscribe(onNext: { [weak self] value in
-            self?.isConnected = value
-         }).disposed(by: bag)
    }
 
    func request() -> Observable<Data?> {
-      guard self.isConnected else {
+
+      guard ReachabilityManager.shared.isNetworkAvailable else {
          return Observable.just(nil)
       }
       
@@ -33,7 +29,7 @@ final class NetworkLayerProxy: NetworkLayerType {
    }
    
    func response(request: URLRequest) -> Observable<Data?> {
-      guard self.isConnected else {
+      guard ReachabilityManager.shared.isNetworkAvailable else {
          return Observable.just(nil)
       }
       return realNetworklayer.response(request:request)

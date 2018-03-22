@@ -10,9 +10,6 @@ import Foundation
 import RxSwift
 
 protocol NetworkLayerType {
-   //   var baseURL : URL { get }
-   //   var session: URLSession { get }
-   //   var resource: URLConfigurationType { get }
    func request() -> Observable<Data?>
    func response(request: URLRequest) -> Observable<Data?>
 }

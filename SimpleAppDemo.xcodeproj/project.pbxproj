@@ -12,6 +12,7 @@
 		0710CDEC2063619200C0E620 /* DateConverter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0710CDEB2063619200C0E620 /* DateConverter.swift */; };
 		0710CDEE20636DE700C0E620 /* NetworklayerProxy.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0710CDED20636DE700C0E620 /* NetworklayerProxy.swift */; };
 		0710CDF02063835200C0E620 /* NetworkLayerType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0710CDEF2063835200C0E620 /* NetworkLayerType.swift */; };
+		0710CDF22063AE3B00C0E620 /* RxExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0710CDF12063AE3B00C0E620 /* RxExtensions.swift */; };
 		079F10A420623E4400D7349D /* ReachabilityManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 079F10A320623E4400D7349D /* ReachabilityManager.swift */; };
 		07C2F3002060ACFE00005B63 /* NetworkLayer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 07C2F2FF2060ACFE00005B63 /* NetworkLayer.swift */; };
 		07C2F3022060B34600005B63 /* BindableType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 07C2F3012060B34600005B63 /* BindableType.swift */; };
@@ -29,7 +30,7 @@
 		07C2F31C2060E1D400005B63 /* ListPosts.swift in Sources */ = {isa = PBXBuildFile; fileRef = 07C2F31B2060E1D400005B63 /* ListPosts.swift */; };
 		4E318F10F3CE5C4882D2BAE3 /* Pods_SimpleAppDemoUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8466415AA17A866C069DBEC4 /* Pods_SimpleAppDemoUITests.framework */; };
 		716BFA41205FE8E900B074F9 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 716BFA40205FE8E900B074F9 /* AppDelegate.swift */; };
-		716BFA43205FE8E900B074F9 /* ListPostTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 716BFA42205FE8E900B074F9 /* ListPostTableViewController.swift */; };
+		716BFA43205FE8E900B074F9 /* ListPostViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 716BFA42205FE8E900B074F9 /* ListPostViewController.swift */; };
 		716BFA48205FE8E900B074F9 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 716BFA47205FE8E900B074F9 /* Assets.xcassets */; };
 		716BFA4B205FE8E900B074F9 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 716BFA49205FE8E900B074F9 /* LaunchScreen.storyboard */; };
 		716BFA56205FE8EA00B074F9 /* SimpleAppDemoTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 716BFA55205FE8EA00B074F9 /* SimpleAppDemoTests.swift */; };
@@ -46,7 +47,7 @@
 		716BFA87205FFEC600B074F9 /* TranslationLayerType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 716BFA86205FFEC600B074F9 /* TranslationLayerType.swift */; };
 		716BFA89205FFF1A00B074F9 /* APIClientError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 716BFA88205FFF1A00B074F9 /* APIClientError.swift */; };
 		716BFA8B2060004600B074F9 /* DetailPostViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 716BFA8A2060004600B074F9 /* DetailPostViewController.swift */; };
-		716BFA8E2060008800B074F9 /* HomeVCAssembly.swift in Sources */ = {isa = PBXBuildFile; fileRef = 716BFA8D2060008800B074F9 /* HomeVCAssembly.swift */; };
+		716BFA8E2060008800B074F9 /* ObjectsAssembly.swift in Sources */ = {isa = PBXBuildFile; fileRef = 716BFA8D2060008800B074F9 /* ObjectsAssembly.swift */; };
 		716BFA90206000C400B074F9 /* DependencyRegistry.swift in Sources */ = {isa = PBXBuildFile; fileRef = 716BFA8F206000C400B074F9 /* DependencyRegistry.swift */; };
 		716BFA9320600E1700B074F9 /* ExtUImage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 716BFA9220600E1700B074F9 /* ExtUImage.swift */; };
 		716BFA9520600E4D00B074F9 /* ExtUITableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 716BFA9420600E4D00B074F9 /* ExtUITableView.swift */; };
@@ -81,6 +82,7 @@
 		0710CDEB2063619200C0E620 /* DateConverter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DateConverter.swift; sourceTree = "<group>"; };
 		0710CDED20636DE700C0E620 /* NetworklayerProxy.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworklayerProxy.swift; sourceTree = "<group>"; };
 		0710CDEF2063835200C0E620 /* NetworkLayerType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkLayerType.swift; sourceTree = "<group>"; };
+		0710CDF12063AE3B00C0E620 /* RxExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RxExtensions.swift; sourceTree = "<group>"; };
 		079F10A320623E4400D7349D /* ReachabilityManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ReachabilityManager.swift; sourceTree = "<group>"; };
 		07C2F2FF2060ACFE00005B63 /* NetworkLayer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkLayer.swift; sourceTree = "<group>"; };
 		07C2F3012060B34600005B63 /* BindableType.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BindableType.swift; sourceTree = "<group>"; };
@@ -103,7 +105,7 @@
 		50178E457D5DCF9A87A48BDB /* Pods-SimpleAppDemoTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SimpleAppDemoTests.release.xcconfig"; path = "Pods/Target Support Files/Pods-SimpleAppDemoTests/Pods-SimpleAppDemoTests.release.xcconfig"; sourceTree = "<group>"; };
 		716BFA3D205FE8E900B074F9 /* SimpleAppDemo.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = SimpleAppDemo.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		716BFA40205FE8E900B074F9 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
-		716BFA42205FE8E900B074F9 /* ListPostTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListPostTableViewController.swift; sourceTree = "<group>"; };
+		716BFA42205FE8E900B074F9 /* ListPostViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListPostViewController.swift; sourceTree = "<group>"; };
 		716BFA47205FE8E900B074F9 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		716BFA4A205FE8E900B074F9 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		716BFA4C205FE8E900B074F9 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -125,7 +127,7 @@
 		716BFA86205FFEC600B074F9 /* TranslationLayerType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TranslationLayerType.swift; sourceTree = "<group>"; };
 		716BFA88205FFF1A00B074F9 /* APIClientError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIClientError.swift; sourceTree = "<group>"; };
 		716BFA8A2060004600B074F9 /* DetailPostViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailPostViewController.swift; sourceTree = "<group>"; };
-		716BFA8D2060008800B074F9 /* HomeVCAssembly.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeVCAssembly.swift; sourceTree = "<group>"; };
+		716BFA8D2060008800B074F9 /* ObjectsAssembly.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ObjectsAssembly.swift; sourceTree = "<group>"; };
 		716BFA8F206000C400B074F9 /* DependencyRegistry.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DependencyRegistry.swift; sourceTree = "<group>"; };
 		716BFA9220600E1700B074F9 /* ExtUImage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExtUImage.swift; sourceTree = "<group>"; };
 		716BFA9420600E4D00B074F9 /* ExtUITableView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExtUITableView.swift; sourceTree = "<group>"; };
@@ -284,6 +286,7 @@
 			isa = PBXGroup;
 			children = (
 				716BFA78205FFC7D00B074F9 /* RxNavigationControllerDelegateProxy.swift */,
+				0710CDF12063AE3B00C0E620 /* RxExtensions.swift */,
 			);
 			path = RxExtensions;
 			sourceTree = "<group>";
@@ -335,7 +338,7 @@
 		716BFA8C2060005B00B074F9 /* Dependencies */ = {
 			isa = PBXGroup;
 			children = (
-				716BFA8D2060008800B074F9 /* HomeVCAssembly.swift */,
+				716BFA8D2060008800B074F9 /* ObjectsAssembly.swift */,
 				716BFA8F206000C400B074F9 /* DependencyRegistry.swift */,
 			);
 			path = Dependencies;
@@ -364,7 +367,7 @@
 		716BFA9B2060113C00B074F9 /* ListPostViewController */ = {
 			isa = PBXGroup;
 			children = (
-				716BFA42205FE8E900B074F9 /* ListPostTableViewController.swift */,
+				716BFA42205FE8E900B074F9 /* ListPostViewController.swift */,
 				716BFA9C206012D700B074F9 /* ListPostTableViewCell.swift */,
 				716BFA9D206012D700B074F9 /* ListPostTableViewCell.xib */,
 				07C2F3032060B3B300005B63 /* ListPostViewModel.swift */,
@@ -696,11 +699,11 @@
 				07C2F3092060B61400005B63 /* User.swift in Sources */,
 				07C2F3112060BC8900005B63 /* EndPointConfiguration.swift in Sources */,
 				07C2F30B2060B6EE00005B63 /* Images.swift in Sources */,
-				716BFA43205FE8E900B074F9 /* ListPostTableViewController.swift in Sources */,
+				716BFA43205FE8E900B074F9 /* ListPostViewController.swift in Sources */,
 				079F10A420623E4400D7349D /* ReachabilityManager.swift in Sources */,
 				716BFA8B2060004600B074F9 /* DetailPostViewController.swift in Sources */,
 				716BFA90206000C400B074F9 /* DependencyRegistry.swift in Sources */,
-				716BFA8E2060008800B074F9 /* HomeVCAssembly.swift in Sources */,
+				716BFA8E2060008800B074F9 /* ObjectsAssembly.swift in Sources */,
 				07C2F31C2060E1D400005B63 /* ListPosts.swift in Sources */,
 				716BFA84205FFE6B00B074F9 /* HTTPConfiguration.swift in Sources */,
 				07C2F31A2060C85E00005B63 /* MainNavigationController.swift in Sources */,
@@ -730,6 +733,7 @@
 				716BFA7B205FFCFA00B074F9 /* Scene+ViewController.swift in Sources */,
 				716BFA9820600FA900B074F9 /* IdentifierReusable.swift in Sources */,
 				716BFA9520600E4D00B074F9 /* ExtUITableView.swift in Sources */,
+				0710CDF22063AE3B00C0E620 /* RxExtensions.swift in Sources */,
 				716BFA79205FFC7D00B074F9 /* RxNavigationControllerDelegateProxy.swift in Sources */,
 				07C2F3182060C4B200005B63 /* DetailViewModel.swift in Sources */,
 				0710CDEA2063569200C0E620 /* ListPostCellViewModel.swift in Sources */,
