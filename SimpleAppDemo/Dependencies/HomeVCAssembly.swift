@@ -63,7 +63,9 @@ class HomeVCAssembly: Assembly {
          
          let network = NetworkLayer(baseURL: baseURL, urlRequest: urlRequest)
          
-         return network
+         let networkProxy = NetworkLayerProxy(network: network)
+         
+         return networkProxy
          
       }.inObjectScope(.weak)
       

@@ -1,14 +1,13 @@
 //
-//  Like.swift
+//  Comment.swift
 //  SimpleAppDemo
 //
-//  Created by Hiem Seyha on 3/20/18.
+//  Created by Hiem Seyha on 3/22/18.
 //  Copyright © 2018 seyha. All rights reserved.
 //
 
 import Foundation
 
-struct Like :Decodable {
+struct Comment: Decodable {
    let count: Int
 }
-

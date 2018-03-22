@@ -16,7 +16,7 @@ class ListPostViewModel {
    // MARK - Internal Access
    private let bag = DisposeBag()
    private var isShouldFetch = true
-   let queue = DispatchQueue(label: "QueueWorkOnPagination")
+
    // MAKR: - Output
    var posts = Variable<[Post]>([])
    var pagination = Variable<Pagination?>(nil)
@@ -27,7 +27,6 @@ class ListPostViewModel {
    
    // MARK: - Init
    init(network: NetworkLayerType, translation: TranslationLayerType) {
-      
       self.network = network
       self.translation = translation
       
@@ -36,58 +35,57 @@ class ListPostViewModel {
 
   lazy var detailAction: Action<Post, Swift.Never> = {
     return Action { post in
-      let detailViewModel = DetailViewModel(item: post)
+      let detailViewModel = DetailViewModel(item: [post])
       return SceneCoordinator.transition(to: .detail(viewModel: detailViewModel), type: .push).asObservable()
     }
   }()
   
    func fetchMorePage() {
-      
-      queue.async(flags: .barrier) { [weak self] in
-         guard let nextString = self?.pagination.value?.next_url else { return }
-         let nextUrl = URL(string: nextString)!
+      //TODO: Fix this stuff
+         guard let nextUrl = self.pagination.value?.next_url else { return }
          let urlRequest = URLRequest(url: nextUrl)
          
-         self?.network.response(request: urlRequest).asObservable()
-            .distinctUntilChanged()
+         self.network.response(request: urlRequest).asObservable()
             .map { [weak self] data  in
-               guard let strongSelf = self else { return [] }
-               guard let result: ListPost = strongSelf.translation.decode(data: data) else { return [] }
-               strongSelf.pagination.value = result.pagination
-               return result.data
-            }.catchErrorJustReturn([])
-            .subscribe(onNext: { newpost in
-               self?.posts.value.append(contentsOf: newpost as [Post])
-            })
-            .disposed(by: (self?.bag)!)
-      }
-      
-     
-      
-   }
-   
-   fileprivate func loadData() {
-      ReachabilityManager.shared.isConnected
-      .subscribe(onNext: { [weak self] value in
-         self?.fetchPosts(isOnline: value)
-      }).disposed(by: bag)
+               self?.responseJSON(with: data)
+            }
+            .map {  [weak self] newpost in
+               guard let result = newpost else { return [] }
+               _ = result.map { self?.posts.value.append($0) }
+               return (self?.posts.value)!
+            }
+            .catchErrorJustReturn([])
+            .bind(to: self.posts)
+            .disposed(by: self.bag)
    }
    
    func fetchPosts(isOnline: Bool) {
       network.request()
          .asObservable()
-         .filter { _ in return isOnline }
-         .distinctUntilChanged()
-         .do(onError: { (error) in
-            debugPrint("error ======= \(error)")
-         })
          .map { [weak self] data  in
             guard let strongSelf = self else { return [] }
-            let result: ListPost = strongSelf.translation.decode(data: data)!
-            strongSelf.pagination.value = result.pagination
-            return result.data
-         }.catchErrorJustReturn([])
+            return strongSelf.responseJSON(with: data)
+         }
+         .catchErrorJustReturn([])
          .bind(to: self.posts)
          .disposed(by: bag)
+   }
+}
+
+//MARK: - Helper
+extension ListPostViewModel {
+   
+   fileprivate func loadData() {
+      ReachabilityManager.shared.isConnected
+         .subscribe(onNext: { [weak self] value in
+            self?.fetchPosts(isOnline: value)
+         }).disposed(by: bag)
+   }
+   
+   fileprivate func responseJSON(with data: Data?) -> [Post] {
+      guard let responseData = data else { return [] }
+      guard let result: ListPost = self.translation.decode(data: responseData) else { return [] }
+      self.pagination.value = result.pagination
+      return result.data
    }
 }

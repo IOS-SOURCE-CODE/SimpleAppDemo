@@ -16,17 +16,17 @@ class ListPostTableViewController: UIViewController, BindableType {
    
    var viewModel: ListPostViewModel!
    private let bag = DisposeBag()
-   var tableView: UITableView!
-   var isLoading = false
+   fileprivate var tableView: UITableView!
+   fileprivate var isLoading = false
   
-  lazy var loadingView:UIActivityIndicatorView = {
+  fileprivate lazy var loadingView:UIActivityIndicatorView = {
     let activityIndicator = UIActivityIndicatorView(activityIndicatorStyle: .gray)
     activityIndicator.hidesWhenStopped = true
     return activityIndicator
     
   }()
   
-  lazy var refresher:UIRefreshControl = {
+  fileprivate lazy var refresher:UIRefreshControl = {
     let refreshControl = UIRefreshControl()
     refreshControl.attributedTitle = NSAttributedString(string: "Pull to refresh")
     refreshControl.addTarget(self, action: #selector(self.refreshing), for: .valueChanged)
@@ -42,7 +42,6 @@ class ListPostTableViewController: UIViewController, BindableType {
       setupLoadingView()
       setupTableView()
       tableView.addSubview(refresher)
-      
       
       ReachabilityManager.shared.isConnected
          .subscribe(onNext: { [weak self] value in
@@ -66,11 +65,11 @@ class ListPostTableViewController: UIViewController, BindableType {
    
     //MARK: - Setup Tableview appearance
    fileprivate func setupTableView() {
-      tableView = UITableView(frame: self.view.bounds)
-      self.view.addSubview(tableView)
+      tableView = UITableView(frame: self.view.frame)
+      view.addSubview(tableView)
       tableView.register(ListPostTableViewCell.self)
-      self.tableView.delegate = self
-      tableView.rowHeight = 455
+      tableView.delegate = self
+      tableView.rowHeight = 500
       tableView.separatorStyle = .none
       tableView.isHidden = true
     
@@ -81,15 +80,13 @@ class ListPostTableViewController: UIViewController, BindableType {
     loadingView.startAnimating()
   }
   
-   @objc func refreshing() {
+   @objc fileprivate func refreshing() {
     
       guard isLoading else {
           refresher.endRefreshing()
          return
       }
-      
       viewModel.fetchPosts(isOnline: isLoading)
-     
    }
 }
 
@@ -98,12 +95,6 @@ extension ListPostTableViewController {
    func bindViewModel() {
       
       viewModel.posts.asDriver()
-         .filter { [weak self] _ in
-            if self?.isLoading == false {
-               self?.loadingView.stopAnimating()
-            }
-            return (self?.isLoading)!
-         }
          .do(onNext: { [weak self] posts in
             guard posts.count > 0 else { return }
             self?.tableView.isHidden = false
@@ -111,7 +102,9 @@ extension ListPostTableViewController {
             self?.refresher.endRefreshing()
          })
          .drive(tableView.rx.items(cellIdentifier: ListPostTableViewCell.identifier, cellType:  ListPostTableViewCell.self)) { index, model, cell in
+            
             cell.configure(with: model)
+            
          }.disposed(by: self.rx.disposeBag)
     
     tableView.rx.itemSelected
@@ -128,46 +121,17 @@ extension ListPostTableViewController {
 }
 
 extension ListPostTableViewController: UITableViewDelegate {
-  
-  func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
-    
-    
-    if indexPath.row == viewModel.posts.value.count - 1 {
-      
-      debugPrint("will display ", indexPath.row)
-       debugPrint("scroll up or down ")
-      
-    }
-    
-  }
 
    func scrollViewDidEndDragging(_ scrollView: UIScrollView, willDecelerate decelerate: Bool) {
-   
-      if scrollView.contentOffset.y + scrollView.contentSize.height >= scrollView.contentSize.height ||
-        scrollView.contentOffset.y + tableView.frame.size.height >= tableView.frame.size.height {
-        
-          debugPrint("more page")
-    
+
+      let currentOffset = scrollView.contentOffset.y
+      let maximumOffset = scrollView.contentSize.height - scrollView.frame.size.height
+
+      if maximumOffset - currentOffset <= 10.0 {
+         viewModel.fetchMorePage()
       }
   }
-  
-   func scrollViewDidScroll(_ scrollView: UIScrollView) {
-      
-      let scrollViewHeight = scrollView.frame.size.height
-      let scrollViewContentSize = scrollView.contentSize.height
-      let contentLarger = (scrollViewContentSize > scrollViewHeight)
-      
-      let viewableHeight = contentLarger ? scrollViewHeight : scrollViewContentSize
-      
-      let loadable = (scrollView.contentOffset.y >= scrollView.contentSize.height - viewableHeight + 50)
-      
-      if loadable {
-//         guard isLoading else { return }
-//         viewModel.fetchMorePage()
-        
-        
-      }
-   }
+
 
 }
 

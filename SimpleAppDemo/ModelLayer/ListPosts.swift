@@ -30,13 +30,3 @@ struct ListPost: Decodable {
       
    }
 }
-
-extension ListPost: JSONDecodable {
-   init?(dictionary: JSONDictionary) {
-      guard let posts = dictionary["data"] as? [JSONDictionary],
-         let pagination = dictionary["pagination"] as? JSONDictionary else { return nil }
-     
-      self.data = posts.map { Post(dictionary: $0)! }
-      self.pagination = Pagination(dictionary: pagination)!
-   }
-}

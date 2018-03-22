@@ -7,6 +7,11 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		0710CDE82063514300C0E620 /* Comment.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0710CDE72063514300C0E620 /* Comment.swift */; };
+		0710CDEA2063569200C0E620 /* ListPostCellViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0710CDE92063569200C0E620 /* ListPostCellViewModel.swift */; };
+		0710CDEC2063619200C0E620 /* DateConverter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0710CDEB2063619200C0E620 /* DateConverter.swift */; };
+		0710CDEE20636DE700C0E620 /* NetworklayerProxy.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0710CDED20636DE700C0E620 /* NetworklayerProxy.swift */; };
+		0710CDF02063835200C0E620 /* NetworkLayerType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0710CDEF2063835200C0E620 /* NetworkLayerType.swift */; };
 		079F10A420623E4400D7349D /* ReachabilityManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 079F10A320623E4400D7349D /* ReachabilityManager.swift */; };
 		07C2F3002060ACFE00005B63 /* NetworkLayer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 07C2F2FF2060ACFE00005B63 /* NetworkLayer.swift */; };
 		07C2F3022060B34600005B63 /* BindableType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 07C2F3012060B34600005B63 /* BindableType.swift */; };
@@ -71,6 +76,11 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		0710CDE72063514300C0E620 /* Comment.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Comment.swift; sourceTree = "<group>"; };
+		0710CDE92063569200C0E620 /* ListPostCellViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListPostCellViewModel.swift; sourceTree = "<group>"; };
+		0710CDEB2063619200C0E620 /* DateConverter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DateConverter.swift; sourceTree = "<group>"; };
+		0710CDED20636DE700C0E620 /* NetworklayerProxy.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworklayerProxy.swift; sourceTree = "<group>"; };
+		0710CDEF2063835200C0E620 /* NetworkLayerType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkLayerType.swift; sourceTree = "<group>"; };
 		079F10A320623E4400D7349D /* ReachabilityManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ReachabilityManager.swift; sourceTree = "<group>"; };
 		07C2F2FF2060ACFE00005B63 /* NetworkLayer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkLayer.swift; sourceTree = "<group>"; };
 		07C2F3012060B34600005B63 /* BindableType.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BindableType.swift; sourceTree = "<group>"; };
@@ -161,6 +171,7 @@
 			isa = PBXGroup;
 			children = (
 				079F10A320623E4400D7349D /* ReachabilityManager.swift */,
+				0710CDEB2063619200C0E620 /* DateConverter.swift */,
 			);
 			path = Helper;
 			sourceTree = "<group>";
@@ -174,6 +185,7 @@
 				07C2F30C2060B94600005B63 /* Like.swift */,
 				07C2F3142060BFF900005B63 /* Pagination.swift */,
 				07C2F31B2060E1D400005B63 /* ListPosts.swift */,
+				0710CDE72063514300C0E620 /* Comment.swift */,
 			);
 			path = ModelLayer;
 			sourceTree = "<group>";
@@ -306,6 +318,8 @@
 				716BFA83205FFE6B00B074F9 /* HTTPConfiguration.swift */,
 				716BFA88205FFF1A00B074F9 /* APIClientError.swift */,
 				07C2F2FF2060ACFE00005B63 /* NetworkLayer.swift */,
+				0710CDED20636DE700C0E620 /* NetworklayerProxy.swift */,
+				0710CDEF2063835200C0E620 /* NetworkLayerType.swift */,
 			);
 			path = NetworkLayer;
 			sourceTree = "<group>";
@@ -354,6 +368,7 @@
 				716BFA9C206012D700B074F9 /* ListPostTableViewCell.swift */,
 				716BFA9D206012D700B074F9 /* ListPostTableViewCell.xib */,
 				07C2F3032060B3B300005B63 /* ListPostViewModel.swift */,
+				0710CDE92063569200C0E620 /* ListPostCellViewModel.swift */,
 			);
 			path = ListPostViewController;
 			sourceTree = "<group>";
@@ -692,12 +707,16 @@
 				716BFA74205FFBB400B074F9 /* SceneCoordinator.swift in Sources */,
 				716BFA9320600E1700B074F9 /* ExtUImage.swift in Sources */,
 				07C2F3132060BD5400005B63 /* ViewModelType.swift in Sources */,
+				0710CDEC2063619200C0E620 /* DateConverter.swift in Sources */,
+				0710CDF02063835200C0E620 /* NetworkLayerType.swift in Sources */,
 				716BFA89205FFF1A00B074F9 /* APIClientError.swift in Sources */,
 				716BFA87205FFEC600B074F9 /* TranslationLayerType.swift in Sources */,
 				07C2F3072060B5D900005B63 /* Post.swift in Sources */,
 				716BFA41205FE8E900B074F9 /* AppDelegate.swift in Sources */,
+				0710CDEE20636DE700C0E620 /* NetworklayerProxy.swift in Sources */,
 				716BFA9A20600FCC00B074F9 /* NibLoadable.swift in Sources */,
 				07C2F3022060B34600005B63 /* BindableType.swift in Sources */,
+				0710CDE82063514300C0E620 /* Comment.swift in Sources */,
 				716BFA70205FFB4C00B074F9 /* Scene.swift in Sources */,
 				716BFA80205FFE1D00B074F9 /* URLRequestConfiguration.swift in Sources */,
 				716BFA72205FFB7200B074F9 /* SceneTransitionType.swift in Sources */,
@@ -713,6 +732,7 @@
 				716BFA9520600E4D00B074F9 /* ExtUITableView.swift in Sources */,
 				716BFA79205FFC7D00B074F9 /* RxNavigationControllerDelegateProxy.swift in Sources */,
 				07C2F3182060C4B200005B63 /* DetailViewModel.swift in Sources */,
+				0710CDEA2063569200C0E620 /* ListPostCellViewModel.swift in Sources */,
 				716BFA76205FFBF700B074F9 /* SceneCoordinatorType.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

@@ -24,22 +24,11 @@ struct Images: Decodable {
    }
 }
 
-extension Images: JSONDecodable {
-   init?(dictionary: JSONDictionary) {
-      guard let thumbnail = dictionary["thumbnail"] as? JSONDictionary,
-      let lowResolution = dictionary["low_resolution"] as? JSONDictionary
-         else { return nil }
-      
-      self.thumbnail = ImageResource(dictionary: thumbnail)!
-      self.lowResolution = ImageResource(dictionary: lowResolution)!
-   }
-}
-
 
 struct ImageResource: Decodable {
    let width:Int
    let height:Int
-   let url:String
+   let url:URL
    
    enum CodingKeys: String, CodingKey {
       case width
@@ -51,18 +40,6 @@ struct ImageResource: Decodable {
       let values = try decoder.container(keyedBy: CodingKeys.self)
       width = try values.decode(Int.self, forKey: .width)
       height = try values.decode(Int.self, forKey: .height)
-      url = try values.decode(String.self, forKey: .url)
-   }
-}
-
-extension ImageResource: JSONDecodable {
-   init?(dictionary: JSONDictionary) {
-      guard let width = dictionary["width"] as? Int,
-      let height = dictionary["height"] as? Int,
-         let url = dictionary["url"] as? String else { return nil }
-      
-      self.width = width
-      self.height = height
-      self.url = url
+      url = try values.decode(URL.self, forKey: .url)
    }
 }

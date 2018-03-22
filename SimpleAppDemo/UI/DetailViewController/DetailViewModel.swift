@@ -7,14 +7,16 @@
 //
 
 import Foundation
-
+import RxSwift
 
 class DetailViewModel {
    
-  let item: Post
+  var item = Variable<[Post]>([])
   
-  init(item:Post) {
-    self.item = item
+  init(item:[Post]) {
+    self.item.value = item
   }
+   
+   
    
 }

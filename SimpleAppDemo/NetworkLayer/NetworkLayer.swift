@@ -9,15 +9,6 @@
 import Foundation
 import RxSwift
 
-protocol NetworkLayerType {
-   var baseURL : URL { get }
-   var session: URLSession { get }
-   var resource: URLConfigurationType { get }
-   func request() -> Observable<Data>
-   func response(request: URLRequest) -> Observable<Data>
-}
-
-
 final class NetworkLayer: NetworkLayerType {
    
    let baseURL : URL
@@ -32,7 +23,7 @@ final class NetworkLayer: NetworkLayerType {
    }
    
    // MARK: -  required url configuration class
-   func request() -> Observable<Data> {
+   func request() -> Observable<Data?> {
       
       return Observable.create { [weak self] observer in
          
@@ -69,7 +60,7 @@ final class NetworkLayer: NetworkLayerType {
    
    
    // MARK: - require url request
-   func response(request: URLRequest) -> Observable<Data> {
+   func response(request: URLRequest) -> Observable<Data?> {
       return Observable.create { observer in
          let task = URLSession.shared.dataTask(with: request) { (data, response, error) in
             if let error = error {

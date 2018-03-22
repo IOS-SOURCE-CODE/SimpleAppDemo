@@ -16,14 +16,14 @@ protocol JSONDecodable {
 }
 
 protocol TranslationLayerType {
-   func decodes<E: JSONDecodable & Decodable>(data: Data) -> [E]
-   func decode<E: JSONDecodable & Decodable>(data: Data) -> E?
+   func decodes<E: Decodable>(data: Data) -> [E]
+   func decode<E: Decodable>(data: Data) -> E?
 }
 
 
 class TranslationLayer: TranslationLayerType {
    
-   func decodes<E: JSONDecodable & Decodable>(data: Data) -> [E] {
+   func decodes<E: Decodable>(data: Data) -> [E] {
       
       do {
          guard let json = try? JSONDecoder().decode([E].self, from: data)
@@ -37,7 +37,7 @@ class TranslationLayer: TranslationLayerType {
       return []
    }
    
-   func decode<E:JSONDecodable & Decodable>(data: Data) -> E? {
+   func decode<E: Decodable>(data: Data) -> E? {
       
       do {
          
