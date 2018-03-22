@@ -23,8 +23,8 @@ struct ListPost: Decodable {
       if let prepagination = try? values.decode(Pagination.self, forKey: .pagination)  {
         self.pagination = prepagination
       } else {
-         pagination?.nextMaxId = nil
-         pagination?.nextUrl = nil
+         pagination?.next_max_id = nil
+         pagination?.next_url = nil
       }
       
       

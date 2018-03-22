@@ -9,12 +9,12 @@
 import Foundation
 
 
-class DetailViewModel: ViewModelType {
+class DetailViewModel {
    
-   let sceneCoordinator: SceneCoordinatorType
-   
-   init(sceneCoordinator: SceneCoordinatorType) {
-      self.sceneCoordinator = sceneCoordinator
-   }
+  let item: Post
+  
+  init(item:Post) {
+    self.item = item
+  }
    
 }

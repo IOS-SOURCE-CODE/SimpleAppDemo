@@ -8,6 +8,7 @@
 
 import Foundation
 import RxSwift
+import Action
 
 class ListPostViewModel {
    
@@ -32,18 +33,18 @@ class ListPostViewModel {
       
       loadData()
    }
-   
-   var test = true
-   
+
+  lazy var detailAction: Action<Post, Swift.Never> = {
+    return Action { post in
+      let detailViewModel = DetailViewModel(item: post)
+      return SceneCoordinator.transition(to: .detail(viewModel: detailViewModel), type: .push).asObservable()
+    }
+  }()
+  
    func fetchMorePage() {
       
-//      guard test == true else {
-//         return
-//      }
-//      test = false
-      
       queue.async(flags: .barrier) { [weak self] in
-         guard let nextString = self?.pagination.value?.nextUrl else { return }
+         guard let nextString = self?.pagination.value?.next_url else { return }
          let nextUrl = URL(string: nextString)!
          let urlRequest = URLRequest(url: nextUrl)
          

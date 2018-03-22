@@ -82,7 +82,7 @@ class ListPostTableViewController: UIViewController, BindableType {
   }
   
    @objc func refreshing() {
-      
+    
       guard isLoading else {
           refresher.endRefreshing()
          return
@@ -111,17 +111,46 @@ extension ListPostTableViewController {
             self?.refresher.endRefreshing()
          })
          .drive(tableView.rx.items(cellIdentifier: ListPostTableViewCell.identifier, cellType:  ListPostTableViewCell.self)) { index, model, cell in
-            
             cell.configure(with: model)
-            
          }.disposed(by: self.rx.disposeBag)
-      
+    
+    tableView.rx.itemSelected
+      .do(onNext: { [unowned self] indexPath in
+        self.tableView.deselectRow(at: indexPath, animated: false)
+      })
+      .map { [unowned self] indexPath -> Post in
+        return self.viewModel.posts.value[indexPath.row]
+      }
+      .subscribe(viewModel.detailAction.inputs)
+      .disposed(by: self.rx.disposeBag)
+    
    }
 }
 
 extension ListPostTableViewController: UITableViewDelegate {
+  
+  func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
+    
+    
+    if indexPath.row == viewModel.posts.value.count - 1 {
+      
+      debugPrint("will display ", indexPath.row)
+       debugPrint("scroll up or down ")
+      
+    }
+    
+  }
 
+   func scrollViewDidEndDragging(_ scrollView: UIScrollView, willDecelerate decelerate: Bool) {
    
+      if scrollView.contentOffset.y + scrollView.contentSize.height >= scrollView.contentSize.height ||
+        scrollView.contentOffset.y + tableView.frame.size.height >= tableView.frame.size.height {
+        
+          debugPrint("more page")
+    
+      }
+  }
+  
    func scrollViewDidScroll(_ scrollView: UIScrollView) {
       
       let scrollViewHeight = scrollView.frame.size.height
@@ -133,8 +162,10 @@ extension ListPostTableViewController: UITableViewDelegate {
       let loadable = (scrollView.contentOffset.y >= scrollView.contentSize.height - viewableHeight + 50)
       
       if loadable {
-         guard isLoading else { return }
-         viewModel.fetchMorePage()
+//         guard isLoading else { return }
+//         viewModel.fetchMorePage()
+        
+        
       }
    }
 
