@@ -100,7 +100,6 @@ extension ListPostViewController {
             self?.refresher.endRefreshing()
          })
          .drive(tableView.rx.items(cellIdentifier: ListPostTableViewCell.identifier, cellType:  ListPostTableViewCell.self)) { index, model, cell in
-            
             cell.configure(with: model)
             
          }.disposed(by: self.rx.disposeBag)
@@ -114,7 +113,28 @@ extension ListPostViewController {
       }
       .subscribe(viewModel.detailAction.inputs)
       .disposed(by: self.rx.disposeBag)
-    
+   
+      
+      tableView.rx.didEndDragging
+      .map { [weak self] _ -> Bool in
+         
+         let currentOffset = self?.tableView.rx.contentOffset.map { $0.y }
+//         scrollView.contentOffset.y
+//            let maximumOffset = scrollView.contentSize.height - scrollView.frame.size.height
+//
+//            if maximumOffset - currentOffset <= 10.0 {
+//              return true
+//            }
+         return false
+      }
+      .subscribe(onNext: { value in
+         print("didEndDragging \(value)")
+      }).disposed(by: self.rx.disposeBag)
+      
+//      tableView.rx.didEndDecelerating
+//         .subscribe(onNext: { value in
+//            print("didEndDecelerating \(value)")
+//         }).disposed(by: self.rx.disposeBag)
    }
 }
 
@@ -130,6 +150,13 @@ extension ListPostViewController: UITableViewDelegate {
 //      }
 //  }
    
+   func scrollViewDidEndDecelerating(_ scrollView: UIScrollView) {
+      debugPrint("scrollViewDidEndDecelerating")
+   }
+   
+   
+  
+   
    func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
       
      
@@ -139,6 +166,12 @@ extension ListPostViewController: UITableViewDelegate {
 
 }
 
+
+extension UIScrollView {
+   func  isNearBottomEdge(edgeOffset: CGFloat = 20.0) -> Bool {
+      return self.contentOffset.y + self.frame.size.height + edgeOffset > self.contentSize.height
+   }
+}
 
 
 

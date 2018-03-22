@@ -21,8 +21,6 @@ class MainNavigationController: UINavigationController , MainNavigationControlle
    override func viewDidLoad() {
       super.viewDidLoad()
       
-       automaticallyAdjustsScrollViewInsets = false
-      
       self.rx.didShow.skip(1).bind {
          SceneCoordinator.currentViewController = $0
       }.disposed(by: self.rx.disposeBag)
