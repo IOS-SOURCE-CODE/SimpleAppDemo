@@ -79,7 +79,6 @@ class ListPostViewModel {
             .distinctUntilChanged()
             .catchErrorJustReturn([])
             .bind(to: self.posts)
-           
             .disposed(by: bag)
       }
    }
