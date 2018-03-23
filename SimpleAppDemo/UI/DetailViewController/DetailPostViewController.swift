@@ -34,6 +34,8 @@ class DetailPostViewController: UIViewController, BindableType {
       tableView.rowHeight = 500
       tableView.separatorStyle = .none
    }
+   
+   
 }
 
 extension DetailPostViewController {
@@ -41,9 +43,14 @@ extension DetailPostViewController {
    
       viewModel.item.asDriver()
          .drive(tableView.rx.items(cellIdentifier: ListPostTableViewCell.identifier, cellType:  ListPostTableViewCell.self)) { index, model, cell in
-            
             cell.configure(with: model)
-            
          }.disposed(by: self.rx.disposeBag)
+      
+      // Bind screen orientation
+      self.rx.sentMessage(#selector(viewWillTransition(to:with:)))
+         .map { return $0[0] as! CGSize }
+         .subscribe(onNext: { [unowned self] size in
+            self.tableView.frame.size = size
+         }).disposed(by: self.rx.disposeBag)
    }
 }
