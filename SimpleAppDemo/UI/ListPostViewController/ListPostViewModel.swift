@@ -9,6 +9,9 @@
 import Foundation
 import RxSwift
 import Action
+import RxDataSources
+
+typealias PostSection = AnimatableSectionModel<String, Post>
 
 class ListPostViewModel {
    
@@ -16,9 +19,10 @@ class ListPostViewModel {
    // MARK - Internal Access
    private let bag = DisposeBag()
    private var isShouldFetch = true
+    private let emptyResult = PostSection(model: "", items: [])
 
    // MAKR: - Output
-   var posts = Variable<[Post]>([])
+   var posts = Variable<[PostSection]>([])
    var pagination = Variable<Pagination?>(nil)
    
    // MARK: - Input
@@ -50,14 +54,24 @@ class ListPostViewModel {
          .map { [weak self] data  in
             self?.responseJSON(with: data)
          }
-         .map {  [weak self] newpost in
-            guard let result = newpost else { return [] }
-            _ = result.map { self?.posts.value.append($0) }
-            return (self?.posts.value)!
-         }
-         .distinctUntilChanged()
-         .catchErrorJustReturn([])
-         .bind(to: self.posts)
+//         .map {  [weak self] newpost in
+//          guard let result = newpost else { return [(self?.emptyResult)!] }
+//
+//          let postSection = result
+//          let results =   self?.posts.value.append(postSection)
+//
+//
+//
+//         }
+//         .distinctUntilChanged()
+//         .catchErrorJustReturn([])
+//         .bind(to: self.posts)
+        
+        .subscribe(onNext:{ [weak self] v in
+          guard let result = v else { return }
+          let newarray = [result]
+          self?.posts.value.append(contentsOf: newarray)
+        })
          .disposed(by: self.bag)
    }
    
@@ -73,10 +87,11 @@ class ListPostViewModel {
          network.request()
             .asObservable()
             .map { [weak self] data  in
-               guard let strongSelf = self else { return [] }
-               return strongSelf.responseJSON(with: data)
+               guard let strongSelf = self else { return [PostSection(model:"", items:[])] }
+               let result = strongSelf.responseJSON(with: data)
+                return [result]
             }
-            .distinctUntilChanged()
+//            .distinctUntilChanged()
             .catchErrorJustReturn([])
             .bind(to: self.posts)
             .disposed(by: bag)
@@ -88,11 +103,13 @@ class ListPostViewModel {
 //MARK: - Helper
 extension ListPostViewModel {
    
-   fileprivate func responseJSON(with data: Data?) -> [Post] {
-      guard let responseData = data else { return [] }
-      guard let result: ListPost = self.translation.decode(data: responseData) else { return [] }
+   fileprivate func responseJSON(with data: Data?) -> PostSection {
+    guard let responseData = data else { return emptyResult }
+      guard let result: ListPost = self.translation.decode(data: responseData) else { return emptyResult }
       self.pagination.value = result.pagination
-      return result.data
+    
+      let postSection = PostSection(model: "", items:result.data)
+      return postSection
    }
 }
 

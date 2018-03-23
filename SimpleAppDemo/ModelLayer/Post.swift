@@ -7,7 +7,7 @@
 //
 
 import Foundation
-
+import RxDataSources
 
 struct Post : Decodable {
    let id: String
@@ -24,4 +24,11 @@ extension Post : Equatable {
    static func ==(lhs: Post, rhs: Post) -> Bool {
       return true
    }
+}
+
+
+extension Post: IdentifiableType {
+  var identity: String {
+    return  id
+  }
 }

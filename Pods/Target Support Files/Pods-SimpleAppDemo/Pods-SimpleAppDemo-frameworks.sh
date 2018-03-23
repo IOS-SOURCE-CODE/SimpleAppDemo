@@ -135,20 +135,24 @@ strip_invalid_archs() {
 
 if [[ "$CONFIGURATION" == "Debug" ]]; then
   install_framework "${BUILT_PRODUCTS_DIR}/Action/Action.framework"
+  install_framework "${BUILT_PRODUCTS_DIR}/Differentiator/Differentiator.framework"
   install_framework "${BUILT_PRODUCTS_DIR}/Kingfisher/Kingfisher.framework"
   install_framework "${BUILT_PRODUCTS_DIR}/NSObject+Rx/NSObject_Rx.framework"
   install_framework "${BUILT_PRODUCTS_DIR}/ReachabilitySwift/ReachabilitySwift.framework"
   install_framework "${BUILT_PRODUCTS_DIR}/RxCocoa/RxCocoa.framework"
+  install_framework "${BUILT_PRODUCTS_DIR}/RxDataSources/RxDataSources.framework"
   install_framework "${BUILT_PRODUCTS_DIR}/RxSwift/RxSwift.framework"
   install_framework "${BUILT_PRODUCTS_DIR}/SnapKit/SnapKit.framework"
   install_framework "${BUILT_PRODUCTS_DIR}/Swinject/Swinject.framework"
 fi
 if [[ "$CONFIGURATION" == "Release" ]]; then
   install_framework "${BUILT_PRODUCTS_DIR}/Action/Action.framework"
+  install_framework "${BUILT_PRODUCTS_DIR}/Differentiator/Differentiator.framework"
   install_framework "${BUILT_PRODUCTS_DIR}/Kingfisher/Kingfisher.framework"
   install_framework "${BUILT_PRODUCTS_DIR}/NSObject+Rx/NSObject_Rx.framework"
   install_framework "${BUILT_PRODUCTS_DIR}/ReachabilitySwift/ReachabilitySwift.framework"
   install_framework "${BUILT_PRODUCTS_DIR}/RxCocoa/RxCocoa.framework"
+  install_framework "${BUILT_PRODUCTS_DIR}/RxDataSources/RxDataSources.framework"
   install_framework "${BUILT_PRODUCTS_DIR}/RxSwift/RxSwift.framework"
   install_framework "${BUILT_PRODUCTS_DIR}/SnapKit/SnapKit.framework"
   install_framework "${BUILT_PRODUCTS_DIR}/Swinject/Swinject.framework"

@@ -21,6 +21,7 @@ target 'SimpleAppDemo' do
   # Community projects
   pod 'Action', '~> 3.4'
   pod 'NSObject+Rx', '~> 4.1'
+  pod 'RxDataSources', '~> 3.0'
   
   # Cache Image
   pod 'Kingfisher', '~> 4.0'

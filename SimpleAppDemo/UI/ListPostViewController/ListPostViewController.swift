@@ -10,7 +10,7 @@ import UIKit
 import RxSwift
 import NSObject_Rx
 import RxCocoa
-
+import RxDataSources
 
 class ListPostViewController: UIViewController, BindableType {
    
@@ -18,6 +18,21 @@ class ListPostViewController: UIViewController, BindableType {
    private let bag = DisposeBag()
    fileprivate var tableView: UITableView!
    fileprivate var isLoading = false
+  
+  var dataSource: RxTableViewSectionedAnimatedDataSource<PostSection>!
+  
+  
+  
+  fileprivate func configureDataSource()  {
+    dataSource = RxTableViewSectionedAnimatedDataSource<PostSection>(configureCell: { (dataSource, tableview, indexPath, item) -> UITableViewCell in
+      
+      let cell: ListPostTableViewCell = tableview.deqeueReusableCell(for: indexPath)
+      cell.configure(with: item)
+      
+      return cell
+    })
+  }
+  
   
   fileprivate lazy var loadingView:UIActivityIndicatorView = {
     let activityIndicator = UIActivityIndicatorView(activityIndicatorStyle: .gray)
@@ -39,14 +54,18 @@ class ListPostViewController: UIViewController, BindableType {
       // View Controller appearance setup
       setupAppearance()
     
-      setupLoadingView()
+    
       setupTableView()
       tableView.addSubview(refresher)
+    
+     setupLoadingView()
       
       ReachabilityManager.shared.isConnected
          .subscribe(onNext: { [weak self] value in
             self?.isLoading = value
          }).disposed(by: bag)
+    
+      configureDataSource()
       
    }
   
@@ -92,27 +111,37 @@ class ListPostViewController: UIViewController, BindableType {
 extension ListPostViewController {
    func bindViewModel() {
       
-      viewModel.posts.asDriver()
-         .do(onNext: { [weak self] posts in
-            guard posts.count > 0 else { return }
-            self?.loadingView.stopAnimating()
-            self?.refresher.endRefreshing()
-         })
-         .drive(tableView.rx.items(cellIdentifier: ListPostTableViewCell.identifier, cellType:  ListPostTableViewCell.self)) { index, model, cell in
-            cell.configure(with: model)
-            
-         }
-        .disposed(by: self.rx.disposeBag)
+//      viewModel.posts.asDriver()
+//         .do(onNext: { [weak self] posts in
+//            guard posts.count > 0 else { return }
+//            self?.loadingView.stopAnimating()
+//            self?.refresher.endRefreshing()
+//         })
+//         .drive(tableView.rx.items(cellIdentifier: ListPostTableViewCell.identifier, cellType:  ListPostTableViewCell.self)) { index, model, cell in
+//            cell.configure(with: model)
+//
+//         }
+//        .disposed(by: self.rx.disposeBag)
     
-    tableView.rx.itemSelected
-      .do(onNext: { [unowned self] indexPath in
-        self.tableView.deselectRow(at: indexPath, animated: false)
-      })
-      .map { [unowned self] indexPath -> Post in
-        return self.viewModel.posts.value[indexPath.row]
-      }
-      .subscribe(viewModel.detailAction.inputs)
+    
+    viewModel.posts.asDriver()
+      .do(onNext: { [weak self] posts in
+          guard posts.count > 0 else { return }
+          self?.loadingView.stopAnimating()
+          self?.refresher.endRefreshing()
+       })
+      .drive(tableView.rx.items(dataSource: dataSource))
       .disposed(by: self.rx.disposeBag)
+    
+//    tableView.rx.itemSelected
+//      .do(onNext: { [unowned self] indexPath in
+//        self.tableView.deselectRow(at: indexPath, animated: false)
+//      })
+//      .map { [unowned self] indexPath -> Post in
+//        return self.viewModel.posts.value[indexPath.row]
+//      }
+//      .subscribe(viewModel.detailAction.inputs)
+//      .disposed(by: self.rx.disposeBag)
   
    
    tableView.rx.didEndDragging
