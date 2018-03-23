@@ -38,10 +38,8 @@ class ListPostViewController: UIViewController, BindableType {
       
       // view appearance setup
       setupAppearance()
-    
       setupTableView()
-      
-       setupLoadingView()
+      setupLoadingView()
       
       ReachabilityManager.shared.isConnected
          .subscribe(onNext: { [weak self] value in
