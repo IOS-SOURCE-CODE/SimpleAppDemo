@@ -127,7 +127,6 @@ extension ListPostViewController {
          }
          .subscribe(onNext: { [weak self] value in
             self?.viewModel.fetchMorePage()
-            debugPrint("reach button")
          }).disposed(by: self.rx.disposeBag)
       
       // Bind screen orientation
