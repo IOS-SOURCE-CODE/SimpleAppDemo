@@ -32,7 +32,7 @@ class ListPostTableViewCell: UITableViewCell {
       
      // Assign property
       profileImage.kf.setImage(with: viewModel.userProfileUrl)
-      postImage.kf.setImage(with: viewModel.postImageURl)
+      postImage.kf.setImage(with: viewModel.postImageURl, placeholder: viewModel.placeHolderUrl)
       likeCountLabel.text = viewModel.numberOfLike
       commentLabel.text = viewModel.numberOfComment
       createDateLabel.text = viewModel.createDate

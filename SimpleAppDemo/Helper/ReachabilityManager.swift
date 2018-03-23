@@ -32,24 +32,20 @@ class ReachabilityManager: NSObject {
    @objc func reachabilityChanged(notification: Notification) {
         
         let reachability = notification.object as! Reachability
-        
-        // Check existing object
-        
+   
         switch reachability.currentReachabilityStatus {
             
         case .reachableViaWiFi:
             reachabilityStatus = .reachableViaWiFi
             isConnected.onNext(isNetworkAvailable)
-            debugPrint("============ reachableViaWiFi :", isNetworkAvailable)
             
         case .reachableViaWWAN:
             reachabilityStatus = .reachableViaWWAN
             isConnected.onNext(isNetworkAvailable)
-            debugPrint("============ reachableViaWWAN :", isNetworkAvailable)
+         
         case .notReachable:
             reachabilityStatus = .notReachable
             isConnected.onNext(isNetworkAvailable)
-            debugPrint("============ notReachable :", isNetworkAvailable)
          
         }
     }

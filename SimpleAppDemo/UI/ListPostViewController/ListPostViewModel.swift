@@ -15,7 +15,6 @@ class ListPostViewModel {
    
    // MARK - Internal Access
    private let bag = DisposeBag()
-   private var isShouldFetch = true
 
    // MAKR: - Output
    var posts = Variable<[Post]>([])
@@ -41,7 +40,7 @@ class ListPostViewModel {
   }()
   
    func fetchMorePage() {
-      //TODO: Fix this stuff
+
       guard let nextUrl = self.pagination.value?.next_url else { return }
       
       let urlRequest = URLRequest(url: nextUrl)

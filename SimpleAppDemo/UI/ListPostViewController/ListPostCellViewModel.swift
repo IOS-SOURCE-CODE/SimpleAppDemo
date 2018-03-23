@@ -6,8 +6,8 @@
 //  Copyright © 2018 seyha. All rights reserved.
 //
 
-import Foundation
 
+import UIKit
 
 class ListPostCellViewModel {
    
@@ -15,6 +15,10 @@ class ListPostCellViewModel {
    
    init(item: Post) {
       self.item = item
+   }
+   
+   var placeHolderUrl: UIImage {
+      return UIImage(named: "emptyImage")!
    }
    
    var userProfileUrl: URL {

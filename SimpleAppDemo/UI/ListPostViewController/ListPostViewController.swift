@@ -36,12 +36,12 @@ class ListPostViewController: UIViewController, BindableType {
    override func viewDidLoad() {
       super.viewDidLoad()
       
-      // View Controller appearance setup
+      // view appearance setup
       setupAppearance()
     
-      setupLoadingView()
       setupTableView()
-      tableView.addSubview(refresher)
+      
+       setupLoadingView()
       
       ReachabilityManager.shared.isConnected
          .subscribe(onNext: { [weak self] value in
@@ -60,18 +60,21 @@ class ListPostViewController: UIViewController, BindableType {
       self.navigationItem.rightBarButtonItem = rightButtonItem
       self.navigationItem.leftBarButtonItem?.tintColor = .black
       self.navigationItem.rightBarButtonItem?.tintColor = .black
-      
    }
    
     //MARK: - Setup Tableview appearance
    fileprivate func setupTableView() {
-      tableView = UITableView(frame: self.view.frame)
+      tableView = UITableView(frame: UIScreen.main.bounds)
+      tableView.contentMode = .redraw
       view.addSubview(tableView)
       tableView.register(ListPostTableViewCell.self)
-      tableView.rowHeight = 500
+      tableView.estimatedRowHeight  = 500
+      tableView.rowHeight = UITableViewAutomaticDimension
       tableView.separatorStyle = .none
-    
+      tableView.addSubview(refresher)
    }
+   
+   //MARK: - Setup loading indicator
   fileprivate func setupLoadingView() {
     loadingView.center = self.view.center
     self.view.addSubview(loadingView)
@@ -79,19 +82,20 @@ class ListPostViewController: UIViewController, BindableType {
   }
   
    @objc fileprivate func refreshing() {
-    
       guard isLoading else {
           refresher.endRefreshing()
          return
       }
       viewModel.loadData()
    }
+     
 }
 
-
+// MARK: - Rxbinding main
 extension ListPostViewController {
    func bindViewModel() {
       
+      // Bind value to table view
       viewModel.posts.asDriver()
          .do(onNext: { [weak self] posts in
             guard posts.count > 0 else { return }
@@ -100,42 +104,53 @@ extension ListPostViewController {
          })
          .drive(tableView.rx.items(cellIdentifier: ListPostTableViewCell.identifier, cellType:  ListPostTableViewCell.self)) { index, model, cell in
             cell.configure(with: model)
-            
          }
-        .disposed(by: self.rx.disposeBag)
-    
-    tableView.rx.itemSelected
-      .do(onNext: { [unowned self] indexPath in
-        self.tableView.deselectRow(at: indexPath, animated: false)
-      })
-      .map { [unowned self] indexPath -> Post in
-        return self.viewModel.posts.value[indexPath.row]
-      }
-      .subscribe(viewModel.detailAction.inputs)
-      .disposed(by: self.rx.disposeBag)
-  
+         .disposed(by: self.rx.disposeBag)
+      
+      // Bind item selected to view model detail
+      tableView.rx.itemSelected
+         .do(onNext: { [unowned self] indexPath in
+            self.tableView.deselectRow(at: indexPath, animated: false)
+         })
+         .map { [unowned self] indexPath -> Post in
+            return self.viewModel.posts.value[indexPath.row]
+         }
+         .subscribe(viewModel.detailAction.inputs)
+         .disposed(by: self.rx.disposeBag)
+      
+      // Bind loading more pagaintion
+      tableView.rx.didEndDragging
+         .debounce(0.5, scheduler: MainScheduler.instance)
+         .withLatestFrom(tableView.rx.contentOffset)
+         .filter { [unowned self] _ -> Bool in
+            return self.tableView.isReachBottom(with: 500)
+         }
+         .subscribe(onNext: { [weak self] value in
+            self?.viewModel.fetchMorePage()
+            debugPrint("reach button")
+         }).disposed(by: self.rx.disposeBag)
+      
+      // Bind screen orientation
+      self.rx.sentMessage(#selector(viewWillTransition(to:with:)))
+         .map { return $0[0] as! CGSize }
+         .subscribe(onNext: { [unowned self] size in
+            self.tableView.frame.size = size
+         }).disposed(by: self.rx.disposeBag)
+   }
    
-   tableView.rx.didEndDragging
-    .withLatestFrom(tableView.rx.contentOffset)
-    .map { [unowned self] scrollView -> CGFloat in
-      return self.isReachBottom(with: scrollView)
-    }
-    .subscribe(onNext: { [weak self] value in
-      if Int(value) < 10 {
-        self?.viewModel.fetchMorePage()
-        self?.tableView.endUpdates()
-      }
-   }).disposed(by: self.rx.disposeBag)
-    
-  }
 }
 
 // MARK: -  Helper
-extension ListPostViewController {
-  
-  fileprivate func isReachBottom(with scrollView: CGPoint) -> CGFloat {
-    let currentOffset = scrollView.y
-    let maximumOffset = tableView.contentSize.height - tableView.frame.size.height
-    return maximumOffset - currentOffset
-  }
+fileprivate extension UIScrollView {
+    fileprivate func isReachBottom(with offset: CGFloat) -> Bool {
+      return self.contentOffset.y + self.frame.size.height + offset > self.contentSize.height
+   }
 }
+
+
+
+
+
+
+
+

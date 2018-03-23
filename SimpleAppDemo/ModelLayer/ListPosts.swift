@@ -20,12 +20,9 @@ struct ListPost: Decodable {
    init(from decoder: Decoder) throws {
       let values = try decoder.container(keyedBy: CodingKeys.self)
       data = try values.decode([Post].self, forKey: .data)
-      if let prepagination = try? values.decode(Pagination.self, forKey: .pagination)  {
-        self.pagination = prepagination
-      } else {
-         pagination?.next_max_id = nil
-         pagination?.next_url = nil
-      }
+     pagination = try values.decode(Pagination.self, forKey: .pagination)
+      
+      
       
       
    }
