@@ -21,4 +21,8 @@ platform :ios do
     build_app(workspace: "SimpleAppDemo.xcworkspace", scheme: "SimpleAppDemo")
     upload_to_testflight
   end
+
+  lane :tests do
+    run_tests(scheme: "SimpleAppDemo")
+  end
 end
